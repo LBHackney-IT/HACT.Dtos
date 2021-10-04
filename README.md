@@ -1,2 +1,2 @@
 # HACT.Dtos
-Housing Association Charitable TrustData Transfer Object
+Housing Association Charitable Trust Data Transfer Object
