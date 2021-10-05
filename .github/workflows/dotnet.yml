@@ -47,11 +47,12 @@ jobs:
       env:
         RELEASE_VERSION: 0.0.1-test
       run: |
-        nuget pack HACT.Dtos -Version ${{steps.set-release-version.outputs.RELEASE_VERSION}}
+        nuget pack HACT.Dtos -Version ${{steps.set-release-version.outputs.RELEASE_VERSION}} -OutputDirectory out
         ls -la
     - name: Publish project
       env:
-        PATH: HACT.Dtos.${{steps.set-release-version.outputs.RELEASE_VERSION}}.nupkg
+        PATH: out/HACT.Dtos.${{steps.set-release-version.outputs.RELEASE_VERSION}}.nupkg
       run:  |
         echo $PATH
+        cd HACT.Dtos
         dotnet nuget push $PATH --api-key ${{ secrets.nuget_api_key }} --source https://api.nuget.org/v3/index.json
