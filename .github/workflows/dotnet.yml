@@ -25,9 +25,18 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - name: Install Nuget
       run: sudo curl -o /usr/local/bin/nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
+    - name: set env var
+      id: set-release-version
+      run: echo '::set-output name=RELEASE_VERSION::0.0.1-test'
     - name: Package project
       env:
         RELEASE_VERSION: 0.0.1-test
       run: |
-        nuget pack HACT.Dtos -Version $RELEASE_VERSION
+        nuget pack HACT.Dtos -Version ${{steps.set-release-version.outputs.RELEASE_VERSION}} -c Release -o out  
         ls -la 
+    - name: Publish project
+      env:
+        PATH: HACT.Dtos.${{steps.set-release-version.outputs.RELEASE_VERSION}}.nupkg
+      run:  |
+        echo $PWD
+        dotnet nuget push $PATH --api-key ${{ secrets.nuget_api_key }} --source https://api.nuget.org/v3/index.json
