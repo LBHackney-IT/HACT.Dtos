@@ -23,11 +23,4 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: set env
-      env: 
-        RELEASE_VERSION: 0.0.1-initiall
-    - name: Package project
-      run: |
-        nuget pack HACT.Dtos -Version $RELEASE_VERSION
-        ls -la $GITHUB_WORKSPACE
-        ls -la
+
