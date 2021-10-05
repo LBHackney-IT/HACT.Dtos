@@ -23,13 +23,11 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: set env
-      run: echo $RELEASE_VERSION
-      env:
-        RELEASE_VERSION: 0.0.1-initiall"
     - name: Install Nuget
       run: sudo curl -o /usr/local/bin/nuget.exe https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
     - name: Package project
+      env:
+        RELEASE_VERSION: 0.0.1-initiall"
       run: |
         nuget pack HACT.Dtos -Version $RELEASE_VERSION
-        ls -la $GITHUB_WORKSPACE
+        ls -la 
