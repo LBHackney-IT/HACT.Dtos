@@ -38,6 +38,5 @@ jobs:
       env:
         PATH: HACT.Dtos.${{steps.set-release-version.outputs.RELEASE_VERSION}}.nupkg
       run:  |
-        echo $PWD
-        echo $PWD
+        echo $PATH
         dotnet nuget push $PATH --api-key ${{ secrets.nuget_api_key }} --source https://api.nuget.org/v3/index.json
