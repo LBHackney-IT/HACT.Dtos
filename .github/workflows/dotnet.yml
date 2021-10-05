@@ -32,7 +32,7 @@ jobs:
       env:
         RELEASE_VERSION: 0.0.1-test
       run: |
-        nuget pack HACT.Dtos -Version ${{steps.set-release-version.outputs.RELEASE_VERSION}} -c Release -o out  
+        nuget pack HACT.Dtos -Version ${{steps.set-release-version.outputs.RELEASE_VERSION}} 
         ls -la 
     - name: Publish project
       env:
