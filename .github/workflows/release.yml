@@ -35,3 +35,7 @@ jobs:
         run: |
           echo $RELEASE_VERSION
           echo ${{ env.RELEASE_VERSION }}
+      - name: Package project
+        run: |
+          nuget pack HACT.Dtos -Version $RELEASE_VERSION
+          ls
