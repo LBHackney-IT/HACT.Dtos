@@ -51,7 +51,7 @@ jobs:
         ls -la
     - name: Publish project
       env:
-        PATH: /home/runner/work/HACT.Dtos/HACT.Dtos/HACT.Dtos.${{steps.set-release-version.outputs.RELEASE_VERSION}}.nupkg
+        PACKAGE_PATH: HACT.Dtos.${{steps.set-release-version.outputs.RELEASE_VERSION}}.nupkg
       run:  |
         echo $PWD
-        dotnet nuget push $PATH --api-key ${{ secrets.nuget_api_key }} --source https://api.nuget.org/v3/index.json
+        dotnet nuget push $PACKAGE_PATH --api-key ${{ secrets.nuget_api_key }} --source https://api.nuget.org/v3/index.json
