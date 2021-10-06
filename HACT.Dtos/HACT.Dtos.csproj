@@ -3,10 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <PackageId>HACT.Dtos</PackageId>
-    <PackageVersion>0.0.1-initial</PackageVersion>
     <Authors>Made Tech</Authors>
     <Company>City Of Lincoln Council</Company>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
-
+  
 </Project>
