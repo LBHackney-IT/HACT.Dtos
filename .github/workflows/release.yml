@@ -47,4 +47,4 @@ jobs:
           PACKAGE_PATH: ${{env.ARTIFACTS_DIRECTORY}}/HACT.Dtos.${{env.RELEASE_VERSION}}.nupkg
         run: |
           echo $PWD
-          dotnet nuget push $PACKAGE_PATH --api-key ${{ secrets.nuget_api_key }} --source https://api.nuget.org/v3/index.json
+          dotnet nuget push $PACKAGE_PATH --api-key ${{secrets.GITHUB_TOKEN}} --source https://nuget.pkg.github.com/City-of-Lincoln-Council/index.json
