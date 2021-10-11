@@ -7,6 +7,77 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HACT.Dtos", "HACT.Dtos\HACT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HACT.Dtos.Tests", "HACT.Dtos.Tests\HACT.Dtos.Tests.csproj", "{D9153C49-85E3-4ABB-97F8-DDA4E7ADAAB4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HACT.Generator", "HACT.Generator\HACT.Generator.csproj", "{D7C45B75-3CDD-4177-8E95-B9F707F5BDB4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HACT.DataStandard", "HACT.DataStandard", "{8CB45BE4-F4F3-4F84-9651-630EDA1F622B}"
+ProjectSection(SolutionItems) = preProject
+	HACT.DataStandard\AffordabilityStatement.json = HACT.DataStandard\AffordabilityStatement.json
+	HACT.DataStandard\CreateRentAccount.json = HACT.DataStandard\CreateRentAccount.json
+	HACT.DataStandard\CareServices.json = HACT.DataStandard\CareServices.json
+	HACT.DataStandard\RequestAvailableAppointments-M3SoR-v6.json = HACT.DataStandard\RequestAvailableAppointments-M3SoR-v6.json
+	HACT.DataStandard\WorkOrderComplete-M3SoR-v6.2.json = HACT.DataStandard\WorkOrderComplete-M3SoR-v6.2.json
+	HACT.DataStandard\RentStatement.json = HACT.DataStandard\RentStatement.json
+	HACT.DataStandard\JobStatusUpdate-M3SoR-v6.2.json = HACT.DataStandard\JobStatusUpdate-M3SoR-v6.2.json
+	HACT.DataStandard\RaiseRepair-M3SoR-v6.json = HACT.DataStandard\RaiseRepair-M3SoR-v6.json
+	HACT.DataStandard\Nominations.json = HACT.DataStandard\Nominations.json
+	HACT.DataStandard\RequestAvailableAppointments-M3SoR-v6.1.json = HACT.DataStandard\RequestAvailableAppointments-M3SoR-v6.1.json
+	HACT.DataStandard\ComponentCertificates.json = HACT.DataStandard\ComponentCertificates.json
+	HACT.DataStandard\RaiseRepair-M3SoR-v7.json = HACT.DataStandard\RaiseRepair-M3SoR-v7.json
+	HACT.DataStandard\JobStatusUpdate-M3SoR-v6.3.json = HACT.DataStandard\JobStatusUpdate-M3SoR-v6.3.json
+	HACT.DataStandard\PlannedMaintenanceDataMigration.json = HACT.DataStandard\PlannedMaintenanceDataMigration.json
+	HACT.DataStandard\CustomerNeedsAssessment.json = HACT.DataStandard\CustomerNeedsAssessment.json
+	HACT.DataStandard\RequestAppointment.json = HACT.DataStandard\RequestAppointment.json
+	HACT.DataStandard\RequestAdditionalWorkApproval-M3SoR-v6.1.json = HACT.DataStandard\RequestAdditionalWorkApproval-M3SoR-v6.1.json
+	HACT.DataStandard\HousemarkPLP.json = HACT.DataStandard\HousemarkPLP.json
+	HACT.DataStandard\UpdateComponentAccounting.json = HACT.DataStandard\UpdateComponentAccounting.json
+	HACT.DataStandard\RequestAvailableAppointments-M3SoR-v7.json = HACT.DataStandard\RequestAvailableAppointments-M3SoR-v7.json
+	HACT.DataStandard\CareReferralResponse.json = HACT.DataStandard\CareReferralResponse.json
+	HACT.DataStandard\WorkOrderComplete-M3SoR-v6.3.json = HACT.DataStandard\WorkOrderComplete-M3SoR-v6.3.json
+	HACT.DataStandard\CareCaseFile.json = HACT.DataStandard\CareCaseFile.json
+	HACT.DataStandard\ScheduleRepair-M3SoR-v6.1.json = HACT.DataStandard\ScheduleRepair-M3SoR-v6.1.json
+	HACT.DataStandard\CareReferralOutcomeFeedback.json = HACT.DataStandard\CareReferralOutcomeFeedback.json
+	HACT.DataStandard\ComponentCertification.json = HACT.DataStandard\ComponentCertification.json
+	HACT.DataStandard\RaiseRepair-M3SoR-v6.2.json = HACT.DataStandard\RaiseRepair-M3SoR-v6.2.json
+	HACT.DataStandard\DevelopmentHandoverFile.json = HACT.DataStandard\DevelopmentHandoverFile.json
+	HACT.DataStandard\RequestAdditionalWorkApproval-M3SoR-v6.json = HACT.DataStandard\RequestAdditionalWorkApproval-M3SoR-v6.json
+	HACT.DataStandard\AssetInventory.json = HACT.DataStandard\AssetInventory.json
+	HACT.DataStandard\JobStatusUpdate-M3SoR-v7.json = HACT.DataStandard\JobStatusUpdate-M3SoR-v7.json
+	HACT.DataStandard\JobStatusUpdate-M3SoR-v6.json = HACT.DataStandard\JobStatusUpdate-M3SoR-v6.json
+	HACT.DataStandard\RequestAdditionalWorkApproval-M3SoR-v7.json = HACT.DataStandard\RequestAdditionalWorkApproval-M3SoR-v7.json
+	HACT.DataStandard\ArrearsReport.json = HACT.DataStandard\ArrearsReport.json
+	HACT.DataStandard\RaiseRepair-M3SoR-v6.3.json = HACT.DataStandard\RaiseRepair-M3SoR-v6.3.json
+	HACT.DataStandard\RequestAppointmentResponse.json = HACT.DataStandard\RequestAppointmentResponse.json
+	HACT.DataStandard\Readme.md = HACT.DataStandard\Readme.md
+	HACT.DataStandard\VoidIncomeLossStatement.json = HACT.DataStandard\VoidIncomeLossStatement.json
+	HACT.DataStandard\DevelopmentBenchmarking.json = HACT.DataStandard\DevelopmentBenchmarking.json
+	HACT.DataStandard\ProgramOfWorkInstruction.json = HACT.DataStandard\ProgramOfWorkInstruction.json
+	HACT.DataStandard\ScheduleRepair-M3SoR-v6.3.json = HACT.DataStandard\ScheduleRepair-M3SoR-v6.3.json
+	HACT.DataStandard\AggregateCaseMetrics.json = HACT.DataStandard\AggregateCaseMetrics.json
+	HACT.DataStandard\ServiceChargeEstimates.json = HACT.DataStandard\ServiceChargeEstimates.json
+	HACT.DataStandard\AssetList.json = HACT.DataStandard\AssetList.json
+	HACT.DataStandard\ScheduleRepair-M3SoR-v6.2.json = HACT.DataStandard\ScheduleRepair-M3SoR-v6.2.json
+	HACT.DataStandard\CareReferral.json = HACT.DataStandard\CareReferral.json
+	HACT.DataStandard\RaiseRepair-M3SoR-v6.1.json = HACT.DataStandard\RaiseRepair-M3SoR-v6.1.json
+	HACT.DataStandard\DevelopmentHandoverConveyance.json = HACT.DataStandard\DevelopmentHandoverConveyance.json
+	HACT.DataStandard\RequestAdditionalWorkApproval-M3SoR-v6.2.json = HACT.DataStandard\RequestAdditionalWorkApproval-M3SoR-v6.2.json
+	HACT.DataStandard\AvailableAppointments.json = HACT.DataStandard\AvailableAppointments.json
+	HACT.DataStandard\CustomerRiskAssessment.json = HACT.DataStandard\CustomerRiskAssessment.json
+	HACT.DataStandard\WorkOrderComplete-M3SoR-v6.json = HACT.DataStandard\WorkOrderComplete-M3SoR-v6.json
+	HACT.DataStandard\RequestAvailableAppointments-M3SoR-v6.2.json = HACT.DataStandard\RequestAvailableAppointments-M3SoR-v6.2.json
+	HACT.DataStandard\ScheduleRepair-M3SoR-v7.json = HACT.DataStandard\ScheduleRepair-M3SoR-v7.json
+	HACT.DataStandard\PropertyTypes.json = HACT.DataStandard\PropertyTypes.json
+	HACT.DataStandard\ProgramOfWork.json = HACT.DataStandard\ProgramOfWork.json
+	HACT.DataStandard\ScheduleRepair-M3SoR-v6.json = HACT.DataStandard\ScheduleRepair-M3SoR-v6.json
+	HACT.DataStandard\JobStatusUpdate-M3SoR-v6.1.json = HACT.DataStandard\JobStatusUpdate-M3SoR-v6.1.json
+	HACT.DataStandard\PropertyMarketingInformation.json = HACT.DataStandard\PropertyMarketingInformation.json
+	HACT.DataStandard\CustomerData.json = HACT.DataStandard\CustomerData.json
+	HACT.DataStandard\RequestAvailableAppointments-M3SoR-v6.3.json = HACT.DataStandard\RequestAvailableAppointments-M3SoR-v6.3.json
+	HACT.DataStandard\WorkOrderComplete-M3SoR-v7.json = HACT.DataStandard\WorkOrderComplete-M3SoR-v7.json
+	HACT.DataStandard\WorkOrderComplete-M3SoR-v6.1.json = HACT.DataStandard\WorkOrderComplete-M3SoR-v6.1.json
+	HACT.DataStandard\LeaseOrFreeholdResponsibilities.json = HACT.DataStandard\LeaseOrFreeholdResponsibilities.json
+	HACT.DataStandard\RequestAdditionalWorkApproval-M3SoR-v6.3.json = HACT.DataStandard\RequestAdditionalWorkApproval-M3SoR-v6.3.json
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,5 +115,17 @@ Global
 		{D9153C49-85E3-4ABB-97F8-DDA4E7ADAAB4}.Release|x64.Build.0 = Release|Any CPU
 		{D9153C49-85E3-4ABB-97F8-DDA4E7ADAAB4}.Release|x86.ActiveCfg = Release|Any CPU
 		{D9153C49-85E3-4ABB-97F8-DDA4E7ADAAB4}.Release|x86.Build.0 = Release|Any CPU
+		{D7C45B75-3CDD-4177-8E95-B9F707F5BDB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7C45B75-3CDD-4177-8E95-B9F707F5BDB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7C45B75-3CDD-4177-8E95-B9F707F5BDB4}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D7C45B75-3CDD-4177-8E95-B9F707F5BDB4}.Debug|x64.Build.0 = Debug|Any CPU
+		{D7C45B75-3CDD-4177-8E95-B9F707F5BDB4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D7C45B75-3CDD-4177-8E95-B9F707F5BDB4}.Debug|x86.Build.0 = Debug|Any CPU
+		{D7C45B75-3CDD-4177-8E95-B9F707F5BDB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7C45B75-3CDD-4177-8E95-B9F707F5BDB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7C45B75-3CDD-4177-8E95-B9F707F5BDB4}.Release|x64.ActiveCfg = Release|Any CPU
+		{D7C45B75-3CDD-4177-8E95-B9F707F5BDB4}.Release|x64.Build.0 = Release|Any CPU
+		{D7C45B75-3CDD-4177-8E95-B9F707F5BDB4}.Release|x86.ActiveCfg = Release|Any CPU
+		{D7C45B75-3CDD-4177-8E95-B9F707F5BDB4}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
