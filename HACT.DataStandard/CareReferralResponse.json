@@ -1,0 +1,22 @@
+{
+  "$schema": "http://www.oscre.org/referencedatamodel/Main/3.3",
+  "id": "http://www.oscre.org/ns/referencedatamodel/CareReferralResponse",
+  "definitions": {
+    "ActualBudgetOrForecastCodeC0": {
+      "type": "string",
+      "enum": ["10","30"]
+    }
+  },
+  "CareReferralResponse": {
+    "type": "object",
+    "properties": {
+      "Accepted": {"type": "boolean", "$comment": "Indicates whether the referral is accepted (true) or declined (false)"},
+      "DeclineReason": {"type": "string", "$comment": "If the referral is declined, thisis a narrative description of why it has been declined."},
+      "ServiceCommencementDate": {"type": "date", "$comment": "The date on which the service will start. This may be a definite date or an estimated date as specified in the ServiceCommencementDateType"},
+      "ServiceCommencementDateCertainty": {"type": "#/definitions/ActualBudgetOrForecastCodeC0", "$comment": "Specifies whether the commencement date given is an actual known date or an estimate."},
+      "ExpectedNextSteps": {"type": "string", "$comment": "A narrative description of what the service user and/or referrer can expect to happen next."},
+      "ReferralReferenceID": {"type": "string", "$comment": "The actual reference number or string used to identify a particular entity in a system or process."}
+    },
+    "required": ["Accepted","ReferralReferenceID"]
+  }
+}

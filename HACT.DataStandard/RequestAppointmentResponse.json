@@ -1,0 +1,47 @@
+{
+  "$schema": "http://www.oscre.org/referencedatamodel/Main/3.3",
+  "id": "http://www.oscre.org/ns/referencedatamodel/RequestAppointmentResponse",
+  "definitions": {
+    "Reference": {
+              "type": "object",
+              "properties": {
+                "ID": {"type": "string", "$comment": "The actual reference number or string used to identify a particular entity in a system or process."},
+                "Description": {"type": "string", "$comment": "An optional description for the reference, or more detail about this reference or who has allocated the reference. For example, this can be used to specify that this reference is a bar code attached to some physical component."},
+                "AllocatedBy": {"type": "string", "$comment": "An identifier of the organization and/or system that allocated this identifier - this could be the name of the organization and/or system or something that identifies the specific instance of a system or database where the ID originated."}
+              },
+              "required": ["ID"]
+            },
+    "RequestAppointmentResponseCode": {
+      "type": "string",
+      "enum": ["10","20","20-10","20-20"]
+    }
+  },
+  "RequestAppointmentResponse": {
+    "type": "object",
+    "properties": {
+      "Response": {"type": "#/definitions/RequestAppointmentResponseCode", "$comment": "Indicates whether the appointment request has resulted in a confirmed appointment or whether the appointment has been denied (and possibly why it has been denied)"},
+      "ConfirmedAppointment": {
+        "type": "object",
+        "properties": {
+          "Date": {"type": "date", "$comment": "The date of this appointment"},
+          "TimeOfDay": {
+            "type": "object",
+            "properties": {
+              "Name": {"type": "string", "$comment": "A narrative description of this appointment time. This is usually used for time windows where there is a common name, for example \"AM\" (meaning perhaps 8am - 12 noon), or \"School run\" (meaning 9.30am - 3pm)."},
+              "EarliestArrivalTime": {"type": "time", "$comment": "The earliest time that the appointment can start."},
+              "LatestArrivalTime": {"type": "time", "$comment": "The latest time that the appointment can start."},
+              "LatestCompletionTime": {"type": "time", "$comment": "The latest estimated time that the appointment will be completed."}
+            }
+          },
+          "WorkElementReference": {
+            "type": "array",
+            "items": 
+            {"type": "#/definitions/Reference"}
+          },
+          "Reference": {"type": "#/definitions/Reference"}
+        },
+        "required": ["TimeOfDay"]
+      }
+    }
+  }
+}

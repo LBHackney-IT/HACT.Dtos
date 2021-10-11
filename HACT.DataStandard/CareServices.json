@@ -1,0 +1,229 @@
+{
+  "$schema": "http://www.oscre.org/referencedatamodel/Main/3.3",
+  "id": "http://www.oscre.org/ns/referencedatamodel/CareServices",
+  "definitions": {
+    "CommunicationChannelCode": {
+      "type": "string",
+      "enum": ["0","1","10","20","30","40","50","60","70","70-10","70-20","70-30","70-40","70-50","70-60","70-70","70-80","70-90","70-100"]
+    },
+    "CommunicationMediumCode": {
+      "type": "string",
+      "enum": ["0","10","10-10","10-20","20","30","30-10","30-20"]
+    },
+    "QuestionOrCriterionTypeCode": {
+      "type": "string",
+      "enum": ["10","20","20-10","20-20","20-30","30","30-10","30-20","30-30","40","40-10","40-20","50"]
+    },
+    "Reference": {
+                    "type": "object",
+                    "properties": {
+                      "ID": {"type": "string", "$comment": "The actual reference number or string used to identify a particular entity in a system or process."},
+                      "AllocatedBy": {"type": "string", "$comment": "An identifier of the organization and/or system that allocated this identifier - this could be the name of the organization and/or system or something that identifies the specific instance of a system or database where the ID originated."}
+                    },
+                    "required": ["ID"]
+                  },
+    "CareServiceCriterion": {
+                      "type": "object",
+                      "properties": {
+                        "CompositeCriterion": {
+                          "type": "array",
+                          "items": 
+,
+    "CustomerNeedTypeCode": {
+      "type": "string",
+      "enum": ["0","10","10-10","10-20","10-30","10-40","10-50","20","30","30-10","30-20","40"]
+    },
+    "CareActionTypeCode": {
+      "type": "string",
+      "enum": ["10","10-10","10-20","10-30","10-40","10-50","10-60","10-70","10-80","10-90","10-100","10-110","10-120","10-130","10-140","10-150","10-160","10-170","10-180","20","20-10","20-20","20-30","20-40","20-50","20-60","20-70","20-80","20-90","20-100","20-110","20-120","20-130","20-140","20-150","20-160","20-170","20-180","20-190","20-200","20-210","20-220","20-230","20-240","30","30-10","30-20","30-30","30-40","30-50","30-60","30-70","30-80","30-90","30-100","30-110","30-120","30-130","30-140","30-150","30-160","30-170","30-180","30-190","30-200","30-210","30-220","30-230","30-240","30-250","30-260","30-270","30-280","30-290","30-300","30-310","30-320","30-330","30-340","30-350","30-360","30-370","30-380","30-390","30-400","30-410","30-420","40","40-20","40-30","40-40"]
+    }
+  },
+  "CareServices": {
+    "type": "object",
+    "properties": {
+      "Service": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "Name": {"type": "string", "$comment": "The name of the service (given by the Service Provider)"},
+            "ActionOrInterventionTypeCode": {
+              "type": "array",
+              "items": {"type": "#/definitions/CareActionTypeCode", "$comment": "Identifies the types of action that are provided by this service."}
+            },
+            "TargetNeedTypeCode": {
+              "type": "array",
+              "items": {"type": "#/definitions/CustomerNeedTypeCode", "$comment": "Identifies the need types that this service is intended to provide care and support for"}
+            },
+            "ApplicableCriteria": {
+              "type": "array",
+              "items": 
+              {
+                "type": "object",
+                "properties": {
+                  "Reference": {"type": "#/definitions/Reference"},
+                  "Criterion": {
+                    "type": "array",
+                    "items": 
+                    {"type": "#/definitions/CareServiceCriterion"}                          {"type": "#/definitions/CareServiceCriterion"}
+                        },
+                        "Reference": {"type": "#/definitions/Reference"},
+                        "Description": {"type": "string", "$comment": "Explains what this question is, and should be used to provide guidance or additional information to the person answering the question."},
+                        "Question": {"type": "string", "$comment": "The question itself."},
+                        "Type": {"type": "#/definitions/QuestionOrCriterionTypeCode", "$comment": "Identifies the type of criterion so that the presentation of the questions, collection of the answer, and assesment of whether or not the answer meets the criterion can be completed."},
+                        "MinimumNumeric": {"type": "number", "$comment": "For numeric type criterion, specifies the minimum number that meets this criterion."},
+                        "MaximumNumeric": {"type": "number", "$comment": "For numeric type criterion, specifies the maximum number that meets this criterion."},
+                        "MinimumDate": {"type": "date", "$comment": "For date type criterion, specifies the earliest date that meets this criterion."},
+                        "MaximumDate": {"type": "date", "$comment": "For date type criterion, specifies the latest date that meets this criterion."}
+                      },
+                      "required": ["Reference","Question"]
+                    }
+                  }
+                },
+                "required": ["Reference"]
+              }
+            },
+            "ReferralDeclaration": {
+              "type": "array",
+              "items": 
+              {
+                "type": "object",
+                "properties": {
+                  "Statement": {"type": "string", "$comment": "The declaration itself that is being made or not made, for example \"I declare that neither I or my family work for the service provider or any affiliated company\"."},
+                  "Reference": {"type": "#/definitions/Reference"}
+                }
+              }
+            },
+            "ReferralConsent": {
+              "type": "array",
+              "items": 
+              {
+                "type": "object",
+                "properties": {
+                  "NoticeText": {"type": "string", "$comment": "The text of the notice that has been consented to. Mayb be used instead of the Notice attachment."},
+                  "Notice": {
+                    "type": "object",
+                    "properties": {
+                      "Filename": {"type": "string", "$comment": "The file system name of the file that is attached - used as the default or suggested name if the file is 'saved'."},
+                      "AsOfDate": {"type": "date", "$comment": "The last date for which the information in the attachment has been verified to be current. Also the effective date, for example the date a photograph was taken."},
+                      "CreationDateTime": {"type": "date-time", "$comment": "Date and time a document or attachment was created"},
+                      "Reference": {
+                        "type": "array",
+                        "items": 
+                        {"type": "#/definitions/Reference"}
+                      },
+                      "URI": {"type": "string", "$comment": "If the attachment is available via a link, the uniform resource identifier (URI) of the attachment. This may be a public link, or a private link to which the recipient has access."},
+                      "Title": {"type": "string", "$comment": "Title or caption for the attached file or document"},
+                      "EmbeddedFileBinaryObject": {"type": "string", "$comment": "An electronic representation of the attachment encoded into text using Base64 content encoding. For more details on this encoding, see https://en.wikipedia.org/wiki/Base64"},
+                      "Description": {"type": "string", "$comment": "A description of the contents of the attached file or document to help a reader establish if this is the correct file before opening"}
+                    }
+                  },
+                  "Reference": {
+                    "type": "array",
+                    "items": 
+                    {"type": "#/definitions/Reference"}
+                  }
+                }
+              }
+            },
+            "ReferralServiceUserDetails": {
+              "type": "object",
+              "properties": {
+                "Occupation": {"type": "boolean", "$comment": "\"true\" indicates this is required"},
+                "MaritalStatus": {"type": "boolean", "$comment": "\"true\" indicates this is required"},
+                "BirthDate": {"type": "boolean", "$comment": "\"true\" indicates this is required"},
+                "Gender": {"type": "boolean", "$comment": "\"true\" indicates this is required"},
+                "Identification": {"type": "boolean", "$comment": "\"true\" indicates this is required"},
+                "Age": {"type": "boolean", "$comment": "\"true\" indicates this is required"},
+                "Citizenship": {"type": "boolean", "$comment": "\"true\" indicates this is required"},
+                "Nationality": {"type": "boolean", "$comment": "\"true\" indicates this is required"},
+                "PlaceOfBirth": {"type": "boolean", "$comment": "\"true\" indicates this is required"},
+                "Alert": {"type": "boolean", "$comment": "\"true\" indicates this is required"},
+                "EthnicOrigin": {"type": "boolean", "$comment": "\"true\" indicates this is required"},
+                "Language": {"type": "boolean", "$comment": "\"true\" indicates this is required"},
+                "Religion": {"type": "boolean", "$comment": "\"true\" indicates this is required"},
+                "SexualOrientation": {"type": "boolean", "$comment": "\"true\" indicates this is required"},
+                "DisabilitiesOrExtraCareNeeds": {"type": "boolean", "$comment": "\"true\" indicates this is required"},
+                "EconomicStatusAndAffordability": {"type": "boolean", "$comment": "\"true\" indicates this is required"}
+              }
+            },
+            "Reference": {"type": "#/definitions/Reference"},
+            "Provider": {
+              "type": "object",
+              "properties": {
+                "Description": {"type": "string", "$comment": "Narrative describing the organization"},
+                "Name": {"type": "string", "$comment": "The full name of this organization\n\nTo specify any name related to this organization."},
+                "Website": {
+                  "type": "array",
+                  "items": {"type": "string", "$comment": "Organization's website address(es)"}
+                },
+                "Contact": {
+                  "type": "array",
+                  "items": 
+                  {
+                    "type": "object",
+                    "properties": {
+                      "DepartmentName": {"type": "string"},
+                      "Name": {
+                        "type": "object",
+                        "properties": {
+                          "Full": {"type": "string", "$comment": "A string of characters providing a name or set of names by which this person is known"},
+                          "Given": {"type": "string", "$comment": "Name or names, usually given to a person by his/her parents at birth, also known as forename, first name or Christian name."},
+                          "Family": {"type": "string", "$comment": "The name a person shares with members of his/her family, also known as surname."},
+                          "FamilyPrefix": {"type": "string", "$comment": "The textual description of any prefix that precedes this person's family name such as van, von etc. (Fred Van Blommestein)."},
+                          "Initials": {"type": "string", "$comment": "Generally in the form of a set of the initial letters of the Given and Middle names, optionally space-delimited."},
+                          "Title": {"type": "string", "$comment": "The textual description of any title associated with a specific person such as Dr.,  Ir. etc."},
+                          "Middle": {"type": "string", "$comment": "Name or names, usually given to a person by his/her parents at birth, other than the first name."}
+                        }
+                      },
+                      "Communication": {
+                        "type": "array",
+                        "items": 
+                        {
+                          "type": "object",
+                          "properties": {
+                            "Channel": {
+                              "type": "object",
+                              "properties": {
+                                "Medium": {"type": "#/definitions/CommunicationMediumCode", "$comment": "Specifies whether the medium of communication is text, audio, video or other."},
+                                "Code": {"type": "#/definitions/CommunicationChannelCode", "$comment": "Identifies the technology that is used for the communication, e.g. telephone or social media."}
+                              }
+                            },
+                            "Value": {"type": "string", "$comment": "The value or address of the communication channel (e.g. phone number, email address,etc.)"},
+                            "Description": {"type": "string", "$comment": "Free text to provide further details about the Communication"},
+                            "NotAvailable": {"type": "boolean", "$comment": "Optional indicator to record that this commuication channel is not available. For example, to indicate that a particular person does not have an email address or modibe phone. This can be used to prevent the person being repeatedly asked to provide contact details they don't hvae."}
+                          }
+                        }
+                      }
+                    },
+                    "required": ["Name"]
+                  }
+                }
+              }
+            },
+            "ReferralFormQuestion": {
+              "type": "array",
+              "items": 
+              {
+                "type": "object",
+                "properties": {
+                  "Reference": {"type": "#/definitions/Reference"},
+                  "Description": {"type": "string", "$comment": "Explains what this question is, and should be used to provide guidance or additional information to the person answering the question."},
+                  "Question": {"type": "string", "$comment": "The question itself."},
+                  "Type": {"type": "#/definitions/QuestionOrCriterionTypeCode", "$comment": "Identifies the type of criterion so that the presentation of the questions, collection of the answer, and assesment of whether or not the answer meets the criterion can be completed."},
+                  "MinimumNumeric": {"type": "number", "$comment": "For numeric type criterion, specifies the minimum number that meets this criterion."},
+                  "MaximumNumeric": {"type": "number", "$comment": "For numeric type criterion, specifies the maximum number that meets this criterion."},
+                  "MinimumDate": {"type": "date", "$comment": "For date type criterion, specifies the earliest date that meets this criterion."},
+                  "MaximumDate": {"type": "date", "$comment": "For date type criterion, specifies the latest date that meets this criterion."}
+                },
+                "required": ["Reference","Question"]
+              }
+            }
+          },
+          "required": ["ReferralServiceUserDetails","Provider"]
+        }
+      }
+    }
+  }
+}

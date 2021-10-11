@@ -1,0 +1,600 @@
+{
+  "$schema": "http://www.oscre.org/referencedatamodel/Main/3.3",
+  "id": "http://www.oscre.org/ns/referencedatamodel/LeaseOrFreeholdResponsibilities",
+  "definitions": {
+    "OptionByCode": {
+      "type": "string",
+      "enum": ["10","20","30","40"]
+    },
+    "OptionTypeCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","40","50","60","70","80","90","100","110","120","130","140","150"]
+    },
+    "DateRangeTypeCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","40"]
+    },
+    "InsuranceTypeCode": {
+      "type": "string",
+      "enum": ["20","30","40","50","60","70","80","90","100","110","120","130","140","150","160","170","180","190","200","0","10"]
+    },
+    "LeaseTypeCodeC0": {
+      "type": "string",
+      "enum": ["0","90","100","110","120"]
+    },
+    "MonetaryAmount": {
+              "type": "object",
+              "properties": {
+                "CurrencyCode": {"type": "#/definitions/CurrencyCode", "$comment": "The currency of this monetary amount"},
+                "Amount": {"type": "number", "$comment": "The amount of money in the specified currency"}
+              },
+              "required": ["Amount"]
+            },
+    "PassThroughTypeCode": {
+      "type": "string",
+      "enum": ["0","10","20","30"]
+    },
+    "ResponsiblePartyCode": {
+      "type": "string",
+      "enum": ["10","20","30"]
+    },
+    "ResponsibilityCategoryCode": {
+      "type": "string",
+      "enum": ["5","10","12","14","16","20","30","32","34","36","38","40","50","60","70","80","90","100","110","120","122","124","126","130","140","150","152","160","170","172","180","190","192","194","200","210","211","212","213","214","215","216","217","218","220","225","230","232","240","250","260","270","280","290","300","310","315","320","325","330","332","334","340","350","360","370"]
+    },
+    "ResponsibilityTypeCode": {
+      "type": "string",
+      "enum": ["10","20","30"]
+    },
+    "LeaseEventOrRightTypeCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","40","50","60","70","80","90","100"]
+    },
+    "DocumentReference": {
+              "type": "object",
+              "properties": {
+                "Page": {"type": "string", "$comment": "Page of the document where this item is specified (or where the specification starts)."},
+                "Paragraph": {"type": "string", "$comment": "Number and/or letter of the paragraph or clause where this item is specified."},
+                "Line": {"type": "string", "$comment": "Line number where this item is specified."},
+                "Section": {"type": "string", "$comment": "Section number where this item is specified."},
+                "Note": {"type": "string", "$comment": "Notes pertaining to this particular part of the document. This could include any pending items critical to the current process."},
+                "DocumentTypeCode": {"type": "#/definitions/DocumentTypeCode", "$comment": "Title or description of the document.  (Example: Lease, Amendment, etc.)."}
+              }
+            },
+    "GrantedInLeaseCode": {
+      "type": "string",
+      "enum": ["10","20","30"]
+    },
+    "CovenantTypeCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","40","40-10","40-20","40-30","50","60","70","75","80","90","100","110","120","130","135","140","150","155","160","170","180","182","185","190","193","197","200","210","220","230","232","234","236","240","250","260","270","280","290","295","300","305","310","320","325","330","340","350","360","370","372","373","375","380","390","400","410","420","430","440","450","460","470","480","490","500","510","520","530","540","550","560","570","580","590","600","610","620","630","640","645","650","660","670","680","690","700","705","710","720","730","735","740","750","760","760-10","760-10-10","760-10-20","760-10-30","760-10-40","760-10-50","760-10-60","770","780","790","800-10","800-20","800-20-10","800-20-20"]
+    },
+    "UNECEUnitOfMeasurementCodeC0": {
+      "type": "string",
+      "enum": ["P1","SF","SM","1N"]
+    },
+    "MethodOfMeasurementCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","40","50","60"]
+    },
+    "AreaMeasurementTypeCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","40","50","60","70","80","90","100","110","120","130","140","150"]
+    },
+    "ChargeTypeCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","40","50","60","70","80","90","100","110","120","130","140","150","160","170","180","190","200","210","220","230","240","250","260"]
+    },
+    "FrequencyCodeC0": {
+      "type": "string",
+      "enum": ["0","20","30","40","50","60","70","70-10","70-20","70-30","70-40","70-0","80","90"]
+    },
+    "ChargeAmountBasisCode": {
+      "type": "string",
+      "enum": ["10","20"]
+    },
+    "CurrencyCode": {
+      "type": "string",
+      "enum": ["AED","AFN","ALL","AMD","ANG","AOA","ARS","AUD","AWG","AZM","BAM","BBD","BDT","BGN","BHD","BIF","BMD","BND","BOB","BRL","BSD","BTN","BWP","BYR","BZD","CAD","CDF","CHE","CHF","CHW","CLP","CNY","COP","COU","CRC","CSD","CUP","CVE","CYP","CZK","DJF","DKK","DOP","DZD","EEK","EGP","ERN","ETB","EUR","FJD","FKP","GBP","GEL","GHC","GIP","GMD","GNF","GTQ","GYD","HKD","HNL","HRK","HTG","HUF","IDR","ILS","INR","IQD","IRR","ISK","JMD","JOD","JPY","KES","KGS","KHR","KMF","KPW","KRW","KWD","KYD","KZT","LAK","LBP","LKR","LRD","LSL","LTL","LVL","LYD","MAD","MDL","MGA","MKD","MMK","MNT","MOP","MRO","MTL","MUR","MVR","MWK","MXN","MYR","MZM","MZN","NAD","NGN","NIO","NOK","NPR","NZD","OMR","PAB","PEN","PGK","PHP","PKR","PLN","PYG","QAR","ROL","RON","RSD","RUB","RWF","SAR","SBD","SCR","SDD","SDG","SEK","SGD","SHP","SIT","SKK","SLL","SOS","SRD","SSP","STD","SVC","SYP","SZL","THB","TJS","TMM","TMT","TND","TOP","TRL","TRY","TTD","TWD","TZS","UAH","UGX","USD","USN","UYI","UYU","UZS","VEB","VEF","VND","VUV","WST","XAF","XAG","XAU","XBA","XBB","XBC","XBD","XCD","XDR","XOF","XPD","XPF","XPT","XSU","YER","ZAR","ZMK","ZMW","ZWD","ZWL"]
+    },
+    "CharityCode": {
+      "type": "string",
+      "enum": ["C","R","S"]
+    },
+    "SIC2": {
+      "type": "string",
+      "enum": ["01","02","07","08","09","10","12","13","14","15","16","17","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","67","70","72","73","75","76","78","79","80","81","82","83","84","86","87","89","91","92","93","94","95","96","97","99"]
+    },
+    "NAICS2Code": {
+      "type": "string",
+      "enum": ["11","21","22","23","31-33","42","44-45","48-49","51","52","53","54","55","56","61","62","71","72","81","92"]
+    },
+    "PropertyAddress": {
+                  "type": "object",
+                  "properties": {
+                    "Postbox": {"type": "string", "$comment": "A post office box number or a numbered post box in a post office assigned to a person or organization where letters for them are kept until called for, used as part of an address."},
+                    "Plot": {"type": "string", "$comment": "A textual description of a small piece of land on which this address is located."},
+                    "BuildingNumber": {"type": "string", "$comment": "The number of a building or house on a street of this address."},
+                    "BuildingName": {"type": "string", "$comment": "The name of the building or house on a street of this address"},
+                    "ComplexName": {"type": "string", "$comment": "Where the address is within a complex, scheme or site, the name of the complex"},
+                    "StreetPrefix": {"type": "string"},
+                    "StreetName": {"type": "string", "$comment": "Name of a street or thoroughfare"},
+                    "StreetSuffix": {"type": "string"},
+                    "CitySubDivision": {"type": "string", "$comment": "A text string identifying a division of a city, for example a local authority area, district or borough."},
+                    "CityName": {"type": "string", "$comment": "The name of the city, town or village of this address."},
+                    "CountrySubentityName": {"type": "string", "$comment": "The name that identifies the territorial division (a chief unit of local administration) of a country, as part of an address, For example a UK County, or a US State etc."},
+                    "Country": {"type": "#/definitions/CountryCode", "$comment": "To provide country information related to this address.\n\nThe country of the address (not the country code)"},
+                    "AddressLine": {
+                      "type": "array",
+                      "maxItems": 7,
+                      "items": {"type": "string", "$comment": "Where the address cannot be separated into the explicit fields, use this as the generic 'address lines' for the address"}
+                    },
+                    "PostalCode": {"type": "string", "$comment": "The identifier for one or more properties according to the postal service of that country; a group of letters and/or numbers added to the postal address to assist in the sorting of mail. E.g. UK postcode or US zip code"}
+                  }
+                },
+    "Contact": {
+                    "type": "object",
+                    "properties": {
+                      "DepartmentName": {"type": "string"},
+                      "Name": {"type": "#/definitions/PersonName"},
+                      "Reference": {"type": "#/definitions/Reference"}
+                    },
+                    "required": ["Name"]
+                  },
+    "PostalAddress": {
+                    "type": "object",
+                    "properties": {
+                      "Postbox": {"type": "string", "$comment": "A post office box number or a numbered post box in a post office assigned to a person or organization where letters for them are kept until called for, used as part of an address."},
+                      "Plot": {"type": "string", "$comment": "A textual description of a small piece of land on which this address is located."},
+                      "BuildingNumber": {"type": "string", "$comment": "The number of a building or house on a street of this address."},
+                      "BuildingName": {"type": "string", "$comment": "The name of the building or house on a street of this address"},
+                      "ComplexName": {"type": "string", "$comment": "Where the address is within a complex, scheme or site, the name of the complex"},
+                      "StreetPrefix": {"type": "string"},
+                      "StreetName": {"type": "string", "$comment": "Name of a street or thoroughfare"},
+                      "StreetSuffix": {"type": "string"},
+                      "CitySubDivision": {"type": "string", "$comment": "A text string identifying a division of a city, for example a local authority area, district or borough."},
+                      "CityName": {"type": "string", "$comment": "The name of the city, town or village of this address."},
+                      "CountrySubentityName": {"type": "string", "$comment": "The name that identifies the territorial division (a chief unit of local administration) of a country, as part of an address, For example a UK County, or a US State etc."},
+                      "Country": {"type": "#/definitions/CountryCode", "$comment": "To provide country information related to this address.\n\nThe country of the address (not the country code)"},
+                      "AddressLine": {
+                        "type": "array",
+                        "maxItems": 7,
+                        "items": {"type": "string", "$comment": "Where the address cannot be separated into the explicit fields, use this as the generic 'address lines' for the address"}
+                      },
+                      "PostalCode": {"type": "string", "$comment": "The identifier for one or more properties according to the postal service of that country; a group of letters and/or numbers added to the postal address to assist in the sorting of mail. E.g. UK postcode or US zip code"}
+                    }
+                  },
+    "PersonName": {
+                        "type": "object",
+                        "properties": {
+                          "Full": {"type": "string", "$comment": "A string of characters providing a name or set of names by which this person is known"},
+                          "Given": {"type": "string", "$comment": "Name or names, usually given to a person by his/her parents at birth, also known as forename, first name or Christian name."},
+                          "Family": {"type": "string", "$comment": "The name a person shares with members of his/her family, also known as surname."},
+                          "FamilyPrefix": {"type": "string", "$comment": "The textual description of any prefix that precedes this person's family name such as van, von etc. (Fred Van Blommestein)."},
+                          "Initials": {"type": "string", "$comment": "Generally in the form of a set of the initial letters of the Given and Middle names, optionally space-delimited."},
+                          "Title": {"type": "string", "$comment": "The textual description of any title associated with a specific person such as Dr.,  Ir. etc."},
+                          "Middle": {"type": "string", "$comment": "Name or names, usually given to a person by his/her parents at birth, other than the first name."}
+                        }
+                      },
+    "CountryCode": {
+      "type": "string",
+      "enum": ["AD","AE","AF","AG","AI","AL","AM","AO","AQ","AR","AS","AT","AU","AW","AX","AZ","BA","BB","BD","BE","BF","BG","BH","BI","BJ","BL","BM","BN","BO","BQ","BR","BS","BT","BW","BY","BZ","CA","CC","CD","CF","CG","CH","CI","CK","CL","CM","CN","CO","CR","CU","CV","CW","CX","CY","CZ","DE","DJ","DK","DM","DO","DZ","EC","EE","EG","EH","ER","ES","ET","FI","FJ","FK","FM","FO","FR","GA","GB","GD","GE","GF","GG","GH","GI","GL","GM","GN","GP","GQ","GR","GS","GT","GU","GW","GY","HK","HM","HN","HR","HT","HU","ID","IE","IL","IM","IN","IO","IQ","IR","IS","IT","JE","JM","JO","JP","KE","KG","KH","KI","KM","KN","KP","KR","KW","KY","KZ","LA","LB","LC","LI","LK","LR","LS","LT","LU","LV","LY","MA","MC","MD","ME","MF","MG","MH","MK","ML","MM","MN","MO","MP","MQ","MR","MS","MT","MU","MV","MW","MX","MY","MZ","NA","NC","NE","NF","NG","NI","NL","NO","NP","NR","NU","NZ","OM","PA","PE","PF","PG","PH","PK","PL","PM","PN","PR","PS","PT","PW","PY","QA","RE","RO","RS","RU","RW","SA","SB","SC","SD","SE","SG","SH","SI","SJ","SK","SL","SM","SN","SO","SR","SS","ST","SV","SX","SY","SZ","TC","TD","TF","TG","TH","TJ","TK","TL","TM","TN","TO","TR","TT","TV","TW","TZ","UA","UG","UM","US","UY","UZ","VA","VC","VE","VG","VI","VN","VU","WF","WS","XZ","YE","YT","ZA","ZM","ZW"]
+    },
+    "LegalEntityTypeCode": {
+      "type": "string",
+      "enum": ["70","0","10","20","30","40","50","60"]
+    },
+    "Reference": {
+          "type": "object",
+          "properties": {
+            "ID": {"type": "string", "$comment": "The actual reference number or string used to identify a particular entity in a system or process."},
+            "AllocatedByDescription": {"type": "string", "$comment": "A text field to describe the organization or organizational role if AllocatedByCode is Other, or if the AllocatedByCode is omitted/not present."},
+            "Description": {"type": "string", "$comment": "An optional description for the reference, or more detail about this reference or who has allocated the reference. For example, this can be used to specify that this reference is a bar code attached to some physical component."},
+            "AllocatedBy": {"type": "string", "$comment": "An identifier of the organization and/or system that allocated this identifier - this could be the name of the organization and/or system or something that identifies the specific instance of a system or database where the ID originated."}
+          },
+          "required": ["ID"]
+        },
+    "DocumentTypeCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","40","50","60","70","80","90","100","110","120"]
+    },
+    "LeaseInEffectCode": {
+      "type": "string",
+      "enum": ["10","20","30","40","50","60"]
+    }
+  },
+  "LeaseOrFreeholdResponsibilities": {
+    "type": "object",
+    "properties": {
+      "LeaseContractReference": {
+        "type": "array",
+        "items": 
+        {"type": "#/definitions/Reference"}
+      },
+      "InEffectCode": {"type": "#/definitions/LeaseInEffectCode", "$comment": "The classification of property availability."},
+      "DocumentHistory": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "DocumentVersion": {"type": "string", "$comment": "Number of Document (Ex: Amendment 4) or if document uploaded for informational purposes and will be checked out and changed such as a Desktop Audit Trend analysis, the version # that has been updated. Should be Auto managed in software."},
+            "DocumentName": {"type": "string", "$comment": "Title of Document - EX: Original Lease, Estoppel dated mm/dd/yy"},
+            "DocumentFilename": {"type": "string", "$comment": "Actual name of uploaded file, .pdf / .txt / .xls , etc"},
+            "DocumentExecutionDate": {"type": "date", "$comment": "Date document was Executed. Usually found in first paragraph or next to signatures."},
+            "DocumentTypeCode": {"type": "#/definitions/DocumentTypeCode", "$comment": "Classification of a legal document such as Lease, Amendment, Estoppell Letter, etc."},
+            "DocumentEffectiveDate": {"type": "date", "$comment": "Date that the document became effective, may be different from date executed."}
+          }
+        }
+      },
+      "LegalParty": {
+        "type": "array",
+        "minItems": 1,
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "Reference": {
+              "type": "array",
+              "items": 
+              {"type": "#/definitions/Reference"}
+            },
+            "Organization": {
+              "type": "object",
+              "properties": {
+                "Name": {"type": "string", "$comment": "The full name of this organization\n\nTo specify any name related to this organization."},
+                "PlaceOfRegistration": {"type": "string", "$comment": "The place where the organization is registered as a legal entity\n\nThe place of registration"},
+                "DoingBusinessAsName": {
+                  "type": "array",
+                  "items": {"type": "string", "$comment": "The name(s) by which this organization officially conducts business."}
+                },
+                "CompanyRegistrationID": {"type": "string", "$comment": "A unique reference number allocated by the Registrar of Companies to a limited liability company or unlimited company at the time of first registration of that company."},
+                "SalesTaxRegistrationNumber": {"type": "string", "$comment": "Registration number\n\nVAT Registration Number"},
+                "LegalEntityType": {"type": "#/definitions/LegalEntityTypeCode", "$comment": "Classification of  the type of legal entity of the Organization.\n\nTo specify the legal classification of this organization such as Inc, LLC, non-profit, etc."},
+                "IndustryClassificationType": {
+                  "type": "array",
+                  "items": {"type": "string", "$comment": "This is a Code List agreed by parties in the transaction to classify an organisation by the industry it belongs to."}
+                },
+                "RegisteredForSalesTaxIndicator": {"type": "boolean", "$comment": "A flag indicating whether the organisation is registered to pay Sales Tax (in UK this is known as VAT)"},
+                "RegisteredOfficeAddress": {"type": "#/definitions/PropertyAddress"},
+                "Contact": {
+                  "type": "array",
+                  "items": 
+                  {"type": "#/definitions/Contact"}
+                },
+                "PostalAddress": {
+                  "type": "array",
+                  "items": 
+                  {"type": "#/definitions/PostalAddress"}
+                }
+              }
+            },
+            "Person": {
+              "type": "object",
+              "properties": {
+                "DepartmentName": {"type": "string"},
+                "Name": {"type": "#/definitions/PersonName"},
+                "Alias": {
+                  "type": "array",
+                  "items": 
+                  {"type": "#/definitions/PersonName"}
+                },
+                "Reference": {"type": "#/definitions/Reference"},
+                "Identification": {
+                  "type": "object",
+                  "properties": {
+                    "Type": {"type": "string", "$comment": "The type of document used to verify the identification of a person. E.g. Passport, Drivers Licence, National Insurance number\n\nIdentification type for a person - e.g. passport, NI, NHS"},
+                    "Number": {"type": "string", "$comment": "The number associated with the Identification Type.\n\nThe number/id associated with the identificaiton type"}
+                  }
+                }
+              },
+              "required": ["Name"]
+            },
+            "BillingOrRemittanceAddress": {"type": "#/definitions/PostalAddress"},
+            "Name": {"type": "string", "$comment": "The name of the Party. This is the Organization name, or the individual's full name. If a Partnership, then list four partners' names. If the named Party is described in the agreement as acting as Nominee or trustee for another Entity then the Name of the other Entity should be included here. For example: \"John Smith acting as trustee for the PISCES Pension Fund\"."},
+            "Contact": {"type": "#/definitions/Contact"},
+            "Address": {
+              "type": "array",
+              "items": 
+              {"type": "#/definitions/PropertyAddress"}
+            },
+            "LegalEntityTypeCode": {
+              "type": "array",
+              "items": {"type": "#/definitions/LegalEntityTypeCode", "$comment": "This is a code to indicate whether the Party is a Partnership, Individual or Other Entity, e.g. Company."}
+            },
+            "NAICS2": {"type": "#/definitions/NAICS2Code", "$comment": "The 2-digit NAICS industry classification of this party"},
+            "SIC2": {"type": "#/definitions/SIC2", "$comment": "The 2-digit SIC  industry classification of this party"},
+            "Verification": {
+              "type": "array",
+              "items": 
+              {
+                "type": "object",
+                "properties": {
+                  "VerifiedBy": {"type": "string", "$comment": "A text description of the verifier of the Party."},
+                  "DateOfVerification": {"type": "date", "$comment": "The date of verification of the Party."}
+                }
+              }
+            },
+            "Department": {
+              "type": "array",
+              "items": {"type": "string", "$comment": "A division of an organization dealing with a specific area of activity."}
+            },
+            "AccountingCostCenterID": {
+              "type": "array",
+              "items": {"type": "string", "$comment": "A unique identifier for a division, department, or subsidiary of a company that has expenses but is not directly producing revenues."}
+            },
+            "TradingName": {"type": "string", "$comment": "A private individual or company that carries out business transactions under another name."},
+            "CharityDetails": {
+              "type": "object",
+              "properties": {
+                "CharityName": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {"type": "string"}
+                },
+                "CharityAddress": {
+                  "type": "array",
+                  "items": 
+                  {"type": "#/definitions/PropertyAddress"}
+                },
+                "CharityType": {"type": "#/definitions/CharityCode"}
+              },
+              "required": ["CharityName","CharityType"]
+            },
+            "PartyDescription": {"type": "string"}
+          },
+          "required": ["Name","Contact"]
+        }
+      },
+      "Charge": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "ChargeDescription": {"type": "string", "$comment": "Name or description of the item of cost."},
+            "ChargeAmount": {"type": "#/definitions/MonetaryAmount"},
+            "ChargeAmountBasisCode": {"type": "#/definitions/ChargeAmountBasisCode", "$comment": "Classification of how the item of cost is defined (i.e, total or per unit of measure)"},
+            "ChargeFrequencyCode": {"type": "#/definitions/FrequencyCodeC0", "$comment": "Frequency of the calculation and/or payment of the item of cost."},
+            "ChargeType": {"type": "#/definitions/ChargeTypeCode", "$comment": "Classification for types of items of cost associated with the Lease."},
+            "LeaseChargeAreaMeasure": {
+              "type": "object",
+              "properties": {
+                "TypeCode": {
+                  "type": "array",
+                  "items": {"type": "#/definitions/AreaMeasurementTypeCode", "$comment": "This is the type of measurement taken - e.g. gross internal, net lettable, zone A etc."}
+                },
+                "ManuallyEnteredIndicator": {"type": "boolean", "$comment": "Indicates whether the Measurement was manually entered onto the system or calculated (for example from a CAD drawing)."},
+                "MethodOfMeasurement": {
+                  "type": "array",
+                  "items": {"type": "#/definitions/MethodOfMeasurementCode", "$comment": "The method used to establish the measurements (e.g. laser measure, tape measure, AVM etc.)"}
+                },
+                "UnitOfMeasurementCode": {"type": "#/definitions/UNECEUnitOfMeasurementCodeC0", "$comment": "This is the unit of measurement used to state the area (eg metric or imperial; cubic or squared)"},
+                "Date": {
+                  "type": "array",
+                  "items": {"type": "date", "$comment": "This is the date when the measurement was taken"}
+                },
+                "Value": {"type": "number", "$comment": "The numerical value of the measurement in the specified units"}
+              },
+              "required": ["Value"]
+            },
+            "DocumentReference": {"type": "#/definitions/DocumentReference"},
+            "Schedule": {
+              "type": "object",
+              "properties": {
+                "StartDate": {"type": "date", "$comment": "The date at which the Amount became payable"},
+                "EndDate": {
+                  "type": "array",
+                  "minItems":                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ,
+                  "maxItems":                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ,
+                  "items": {"type": "date", "$comment": "If known, the date at which the Charge ceases to be payable."}
+                }
+              },
+              "required": ["EndDate"]
+            }
+          },
+          "required": ["ChargeAmount","ChargeAmountBasisCode","ChargeFrequencyCode","ChargeType"]
+        }
+      },
+      "Covenant": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "Comments": {"type": "string", "$comment": "Additional elaboration on Covenant."},
+            "CovenantTypeCode": {"type": "#/definitions/CovenantTypeCode", "$comment": "The classification of a lease covenant or clause."},
+            "GrantedInLeaseCode": {"type": "#/definitions/GrantedInLeaseCode", "$comment": "Explains whether the lease allows, does not allow or does not mention this covenant."},
+            "DocumentReference": {"type": "#/definitions/DocumentReference"}
+          },
+          "required": ["CovenantTypeCode"]
+        }
+      },
+      "LeaseEventOrRight": {
+        "type": "array",
+        "minItems": 1,
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "Name": {"type": "string", "$comment": "The Name or title of the leasing event associated with the Lease Date Value."},
+            "EventOrRightTypeCode": {"type": "#/definitions/LeaseEventOrRightTypeCode", "$comment": "The Name or title of the leasing event associated with the Lease Date Value."},
+            "Description": {"type": "string", "$comment": "The description of an event to be associated with the Lease Date."},
+            "ActionStatus": {"type": "string", "$comment": "The description of the status of any action related to this specific right or event, for example that notice has been received."},
+            "Date": {"type": "date", "$comment": "An actual date value for an event pertaining to the lease."},
+            "DocumentReference": {"type": "#/definitions/DocumentReference"}
+          },
+          "required": ["Name","Description","Date"]
+        }
+      },
+      "LeaseResponsibility": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "ServiceLevel": {"type": "string", "$comment": "Description of service response time."},
+            "ResponsibilityTypeCode": {
+              "type": "array",
+              "items": {"type": "#/definitions/ResponsibilityTypeCode", "$comment": "Classification of the Type of lease-related accountability and/or authority."}
+            },
+            "ResponsibilityCategoryCode": {"type": "#/definitions/ResponsibilityCategoryCode", "$comment": "The class of physical component to be maintained, repaired or replaced; such as the landscaping, roof, roadway etc."},
+            "ExecutionResponsibilityCode": {"type": "#/definitions/ResponsiblePartyCode", "$comment": "The Party responsible for arranging the contract or performing the work.  Which Party is responsible is dependent on the Responsibility type."},
+            "FinancialResponsibilityCode": {"type": "#/definitions/ResponsiblePartyCode", "$comment": "The Party responsible to pay for the repair, replacement or maintenance expense.  Which Party is responsible is dependent on the Responsibility type."},
+            "IncludedInRentIndicator": {"type": "boolean", "$comment": "Indicates whether or not financial responsibility is included in rent."},
+            "PassThroughTypeCode": {"type": "#/definitions/PassThroughTypeCode", "$comment": "Classification which describes the way the Landlord passes the cost to the Tenant."},
+            "LandlordPercent": {"type": "number", "$comment": "For a specific Lease Responsibility Type this is the maximum percentage of the total for which the Tenant is responsible."},
+            "TenantPercent": {"type": "number", "$comment": "For a specific Lease Responsibility Type this is the maximum percentage of the total for which the Tenant is responsible."},
+            "TenantCapAmount": {"type": "#/definitions/MonetaryAmount"},
+            "LandlordCapAmount": {"type": "#/definitions/MonetaryAmount"},
+            "GrantedInLeaseCode": {"type": "#/definitions/GrantedInLeaseCode", "$comment": "Explains whether the lease allows, does not allow or does not mention this resoponsibliity."},
+            "DocumentReference": {"type": "#/definitions/DocumentReference"}
+          }
+        }
+      },
+      "Indices": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "IndexName": {"type": "string", "$comment": "The Name or title of the rent escalation adjustment index."},
+            "IndexSource": {"type": "string", "$comment": "The specified source for the rent escalation adjustment index."},
+            "AdjustmentFrequencyCode": {"type": "#/definitions/FrequencyCodeC0", "$comment": "The frequency with which the rent escalation adjustment will be made."},
+            "BaseIndexAdjustmentNumeric": {"type": "number", "$comment": "An adjustment factor for the base index value at base year.  May be 1.0 if no adjustment of the base index value is required."},
+            "BaseIndexValueNumeric": {"type": "number", "$comment": "The Base Index Value at base year."},
+            "BaseIndexDate": {"type": "date", "$comment": "The date for the adjustment calculation."},
+            "MinimumPeriodicIncreasePercent": {"type": "number", "$comment": "If the calculated increase during a lease period is less than the minimum increase specified then the minimum increase is used."},
+            "MaximumPeriodicIncreasePercent": {"type": "number", "$comment": "If the calculated increase during a lease period is greater than the maximum increase specified in the lease then the maximum increase is used."},
+            "MinimumLifetimeIncreasePercent": {"type": "number", "$comment": "If the calculated increase during the lease life time is less than the minimum increase specified then the minimum increase is used."},
+            "MaximumLifetimeIncreasePercent": {"type": "number", "$comment": "If the calculated increase during the lease life time is greater than the maximum increase specified in the lease then the maximum increase is used."}
+          }
+        }
+      },
+      "PreparedBy": {"type": "#/definitions/Contact"},
+      "FirstDayOfTermDate": {"type": "date", "$comment": "The date of the first day of the Lease term.  This may not necessarily be the same date that appears on the Lease as this date is always inclusive of the term start date.  This is NOT the day from which the beginning of the term is calculated."},
+      "LastDayOfTermDate": {
+        "type": "array",
+        "items": {"type": "date", "$comment": "The date of the last day of the lease term. This may be expressed in the lease or may more often be inferred from the First Day of Term and the Lease Term."}
+      },
+      "TypeCode": {
+        "type": "array",
+        "items": {"type": "#/definitions/LeaseTypeCodeC0", "$comment": "The classification of a lease based on the services and payments associated with a lease."}
+      },
+      "Rent": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "Description": {"type": "string", "$comment": "Free text to describe the rent, for example; principal rent, base rent under a turnover lease."},
+            "InitialAmount": {"type": "#/definitions/MonetaryAmount"},
+            "CurrentRentPayableAmount": {"type": "#/definitions/MonetaryAmount"},
+            "CommencementDate": {"type": "date", "$comment": "The date at which the Amount became payable\n\nThe data at which the rent amount becomes payable"},
+            "AnnualisedAmount": {"type": "#/definitions/MonetaryAmount"},
+            "Indexation": {
+              "type": "object",
+              "properties": {
+                "IndexUsed": {"type": "string", "$comment": "The name of the index used as the basis for the indexation"},
+                "IndexUsedDescription": {"type": "string", "$comment": "If the uplift is determined by using an index this field describes the index used"},
+                "PercentageAppliedPercent": {"type": "number", "$comment": "What is the percentage adjustment to be applied."},
+                "Timing": {"type": "string", "$comment": "The timing when index is applied is generally annual but in Germany this is different as timing could be triggered  by index reaches a certain percentage"},
+                "IndexFrequency": {"type": "string", "$comment": "The frequency of the index in number of months for example yearly will be 12."},
+                "AnniversaryDate": {"type": "date", "$comment": "For RPI which might not be annually."},
+                "CommencementDate": {"type": "date", "$comment": "The start date when indexation start being applied"}
+              }
+            }
+          }
+        }
+      },
+      "Comment": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "Comment": {"type": "string", "$comment": "A free form text field that contains the notations relevant to the Work Order"},
+            "Contact": {"type": "#/definitions/Contact"}
+          },
+          "required": ["Comment","Contact"]
+        }
+      },
+      "Insurance": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "InsuranceNotes": {"type": "string"},
+            "FromDate": {"type": "date"},
+            "EndDate": {"type": "date"},
+            "CertificateReceivedIndicator": {"type": "boolean"},
+            "InsuranceTypeCode": {"type": "#/definitions/InsuranceTypeCode", "$comment": "The classification of insurance stipulated by the lease agreement."},
+            "AggregateAmount": {"type": "#/definitions/MonetaryAmount"},
+            "SingleOccurrenceAmount": {"type": "#/definitions/MonetaryAmount"},
+            "LandlordAlsoNamedInsuredIndicator": {"type": "boolean", "$comment": "Does the Landlord require their name to be on the insurance policy."},
+            "AgentAlsoNamedInsuredIndicator": {"type": "boolean", "$comment": "Does the Agent require their name to be on the insurance policy."},
+            "TenantAlsoNamedInsuredIndicator": {"type": "boolean", "$comment": "Does the Tenant require their name to be on the insurance policy."},
+            "PolicyRequiredIndicator": {"type": "boolean", "$comment": "Indicates whether or not an insurance policy is required."},
+            "DocumentReference": {"type": "#/definitions/DocumentReference"}
+          },
+          "required": ["InsuranceTypeCode"]
+        }
+      },
+      "Option": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "Description": {"type": "string", "$comment": "A narrative description or summary of this option"},
+            "DateCode": {"type": "#/definitions/DateRangeTypeCode", "$comment": "Defines date range for an Option"},
+            "EffectiveDate": {"type": "date", "$comment": "Date that an option can be exercised on, up to or from; or where the option can exercised within a date range, the earliest date that the option can be exercised on. For an option that has already been exercised, this is the actual  date on which the option was exercised."},
+            "EarliestEffectiveDate": {"type": "date", "$comment": "Where the option date code is Period the earliest date that the option can be exercised on"},
+            "LatestEffectiveDate": {"type": "date", "$comment": "Where the option date code is Period the latest date that the option can be exercised on"},
+            "TypeCode": {"type": "#/definitions/OptionTypeCode", "$comment": "Nature of the option as defined in Lease terms"},
+            "OptionByCode": {"type": "#/definitions/OptionByCode", "$comment": "Party or parties that can exercise the option e.g. Landlord"},
+            "EarliestNoticeDate": {"type": "date", "$comment": "Date that notice of the exercising of an option can be served on, or where the notice can be exercised within a date range, the earliest date that notice of the exercising of an option can be served on"},
+            "LatestNoticeDate": {"type": "date", "$comment": "Where notice can exercised within a date range the latest date that notice of the exercising of an option can be served on"},
+            "LeaseAmount": {"type": "#/definitions/MonetaryAmount"},
+            "NoticeTermType": {"type": "string"},
+            "Order": {"type": "integer", "$comment": "The order of the option if there are multiple options"},
+            "Term": {"type": "string", "$comment": "The applicable term associated with this option, for example the length of a renewal"},
+            "TermFrequencyCode": {"type": "#/definitions/FrequencyCodeC0", "$comment": "The type of period such as day, month or permenant"},
+            "IndefiniteLeaseIndicator": {"type": "boolean", "$comment": "Used when Options to extend the Lease are Indefinite."},
+            "AdditionalInformation": {
+              "type": "object",
+              "properties": {
+                "Title": {
+                  "type": "array",
+                  "items": {"type": "string", "$comment": "This is the header of the additional information"}
+                },
+                "Description": {
+                  "type": "array",
+                  "items": {"type": "string", "$comment": "A full description"}
+                },
+                "Date": {
+                  "type": "array",
+                  "items": {"type": "date", "$comment": "Date of the information"}
+                }
+              }
+            }
+          }
+        }
+      },
+      "TermDuration": {
+        "type": "object",
+        "properties": {
+          "Description": {"type": "string", "$comment": "A narrative description of this duration to be included IN ADDITION to the specific duration using the other attributes of this entity."},
+          "Years": {"type": "integer", "$comment": "The number of complete years in this duration. When calculating an end date by adding this duration to a start date, the number of years are added first, before any other duration attributes."},
+          "Months": {"type": "integer", "$comment": "The number of complete months in this duration. When calculating an end date by adding this duration to a start date, the number of years are added first, then the number of months, before any other duration attributes."},
+          "Weeks": {"type": "integer", "$comment": "The number of complete weeks in this duration. When calculating an end date by adding this duration to a start date, the number of years are added first, then the months, then the weeks, before any other duration attributes."},
+          "Days": {"type": "integer", "$comment": "The number of complete days in this duration. When calculating an end date by adding this duration to a start date, the number of years are added first, then the months, then weeks, then days, before any other duration attributes."},
+          "Hours": {"type": "integer", "$comment": "The number of complete hours in this duration. When calculating an end date by adding this duration to a start date, the number of years are added first, then the months, then weeks, then days, then hours, before any other duration attributes."},
+          "Minutes": {"type": "integer", "$comment": "The number of complete minutes in this duration. When calculating an end date by adding this duration to a start date, the number of years are added first, then the months, then weeks, then days, then hours, then minutes, before any other duration attributes."}
+        }
+      }
+    },
+    "required": ["LegalParty","LeaseEventOrRight"]
+  }
+}

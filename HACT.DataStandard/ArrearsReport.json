@@ -1,0 +1,189 @@
+{
+  "$schema": "http://www.oscre.org/referencedatamodel/Main/3.3",
+  "id": "http://www.oscre.org/ns/referencedatamodel/ArrearsReport",
+  "definitions": {
+    "Comment": {
+                "type": "object",
+                "properties": {
+                  "Comment": {"type": "string", "$comment": "A free form text field that contains the notations relevant to the Work Order"},
+                  "Category": {
+                    "type": "array",
+                    "items": 
+                    {"type": "#/definitions/Categorization"}
+                  },
+                  "CommentDateTime": {"type": "date-time", "$comment": "The date and time that the Work Order comment was created"},
+                  "Contact": {
+                    "type": "object",
+                    "properties": {
+                      "DepartmentName": {"type": "string"},
+                      "Name": {"type": "#/definitions/PersonName"},
+                      "Reference": {"type": "#/definitions/Reference"}
+                    },
+                    "required": ["Name"]
+                  }
+                },
+                "required": ["Comment","Contact"]
+              },
+    "Categorization": {
+                "type": "object",
+                "properties": {
+                  "Type": {"type": "string", "$comment": "The type of the category that this categorization belongs to, e.g. \"Portfolio\", \"Country\", or \"RICS Red Book\""},
+                  "Category": {"type": "string", "$comment": "The category value of this categorization, e.g. \"Class A Offices\", or \"Canada\""},
+                  "SubCategory": {"type": "string", "$comment": "If applicable, the sub-category of this categorization (i.e. a subcategory within the 'Category' chosen above)"}
+                }
+              },
+    "PersonName": {
+                  "type": "object",
+                  "properties": {
+                    "Full": {"type": "string", "$comment": "A string of characters providing a name or set of names by which this person is known"},
+                    "Given": {"type": "string", "$comment": "Name or names, usually given to a person by his/her parents at birth, also known as forename, first name or Christian name."},
+                    "Family": {"type": "string", "$comment": "The name a person shares with members of his/her family, also known as surname."},
+                    "FamilyPrefix": {"type": "string", "$comment": "The textual description of any prefix that precedes this person's family name such as van, von etc. (Fred Van Blommestein)."},
+                    "Initials": {"type": "string", "$comment": "Generally in the form of a set of the initial letters of the Given and Middle names, optionally space-delimited."},
+                    "Title": {"type": "string", "$comment": "The textual description of any title associated with a specific person such as Dr.,  Ir. etc."},
+                    "Middle": {"type": "string", "$comment": "Name or names, usually given to a person by his/her parents at birth, other than the first name."}
+                  }
+                },
+    "Duration": {
+              "type": "object",
+              "properties": {
+                "Years": {"type": "integer", "$comment": "The number of complete years in this duration. When calculating an end date by adding this duration to a start date, the number of years are added first, before any other duration attributes."},
+                "Months": {"type": "integer", "$comment": "The number of complete months in this duration. When calculating an end date by adding this duration to a start date, the number of years are added first, then the number of months, before any other duration attributes."},
+                "Weeks": {"type": "integer", "$comment": "The number of complete weeks in this duration. When calculating an end date by adding this duration to a start date, the number of years are added first, then the months, then the weeks, before any other duration attributes."},
+                "Days": {"type": "integer", "$comment": "The number of complete days in this duration. When calculating an end date by adding this duration to a start date, the number of years are added first, then the months, then weeks, then days, before any other duration attributes."}
+              }
+            },
+    "Reference": {
+                          "type": "object",
+                          "properties": {
+                            "ID": {"type": "string", "$comment": "The actual reference number or string used to identify a particular entity in a system or process."},
+                            "AllocatedBy": {"type": "string", "$comment": "An identifier of the organization and/or system that allocated this identifier - this could be the name of the organization and/or system or something that identifies the specific instance of a system or database where the ID originated."}
+                          },
+                          "required": ["ID"]
+                        },
+    "TenureTypeCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","40","100","110","120","130","140","150","160","170","180","190","200","210","220","230","240","250"]
+    },
+    "PaymentMethodCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","40","50","60","70"]
+    },
+    "Period": {
+        "type": "object",
+        "properties": {
+          "Description": {"type": "string", "$comment": "Description of the period, e.g. \"Customer on holiday\", or \"Week 34\""},
+          "StartDateTime": {"type": "date-time", "$comment": "This is the start date for the period eg 20th January. It may (optionally) include a time on that date."},
+          "EndDateTime": {"type": "date-time", "$comment": "This is the end date for the period eg 20th June. It may (optionally) include a time on that date."}
+        }
+      },
+    "MonetaryAmount": {
+              "type": "object",
+              "properties": {
+                "CurrencyCode": {"type": "#/definitions/CurrencyCode", "$comment": "The currency of this monetary amount"},
+                "Amount": {"type": "number", "$comment": "The amount of money in the specified currency"}
+              },
+              "required": ["Amount"]
+            },
+    "CurrencyCode": {
+      "type": "string",
+      "enum": ["AED","AFN","ALL","AMD","ANG","AOA","ARS","AUD","AWG","AZM","BAM","BBD","BDT","BGN","BHD","BIF","BMD","BND","BOB","BRL","BSD","BTN","BWP","BYR","BZD","CAD","CDF","CHE","CHF","CHW","CLP","CNY","COP","COU","CRC","CSD","CUP","CVE","CYP","CZK","DJF","DKK","DOP","DZD","EEK","EGP","ERN","ETB","EUR","FJD","FKP","GBP","GEL","GHC","GIP","GMD","GNF","GTQ","GYD","HKD","HNL","HRK","HTG","HUF","IDR","ILS","INR","IQD","IRR","ISK","JMD","JOD","JPY","KES","KGS","KHR","KMF","KPW","KRW","KWD","KYD","KZT","LAK","LBP","LKR","LRD","LSL","LTL","LVL","LYD","MAD","MDL","MGA","MKD","MMK","MNT","MOP","MRO","MTL","MUR","MVR","MWK","MXN","MYR","MZM","MZN","NAD","NGN","NIO","NOK","NPR","NZD","OMR","PAB","PEN","PGK","PHP","PKR","PLN","PYG","QAR","ROL","RON","RSD","RUB","RWF","SAR","SBD","SCR","SDD","SDG","SEK","SGD","SHP","SIT","SKK","SLL","SOS","SRD","SSP","STD","SVC","SYP","SZL","THB","TJS","TMM","TMT","TND","TOP","TRL","TRY","TTD","TWD","TZS","UAH","UGX","USD","USN","UYI","UYU","UZS","VEB","VEF","VND","VUV","WST","XAF","XAG","XAU","XBA","XBB","XBC","XBD","XCD","XDR","XOF","XPD","XPF","XPT","XSU","YER","ZAR","ZMK","ZMW","ZWD","ZWL"]
+    }
+  },
+  "ArrearsReport": {
+    "type": "object",
+    "properties": {
+      "Date": {"type": "date-time", "$comment": "The date this report was produced/published"},
+      "Period": {"type": "#/definitions/Period"},
+      "Item": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "AnnualizedRentRoll": {"type": "#/definitions/MonetaryAmount"},
+            "TotalCollected": {"type": "#/definitions/MonetaryAmount"},
+            "CollectionRate": {"type": "number", "$comment": "The ratio of Total Collected in this arrears period, to the proportion of the Annualized Rent Roll that is attributable to this arrears period. The amount attributable should normally be calculated on a pro-rata basis (i.e. based on the proportion of a full year the duration of the period covers). If greater that 1 that indicates that the arrears included in this item have reduced during the arrears period."},
+            "ActualArrearsAmount": {"type": "#/definitions/MonetaryAmount"},
+            "ArrearsAdjustment": {
+              "type": "array",
+              "items": 
+              {
+                "type": "object",
+                "properties": {
+                  "Name": {"type": "string", "$comment": "A name that indicates the basic nature of the adjustment, e.g. \"Housing benefit\""},
+                  "Amount": {"type": "#/definitions/MonetaryAmount"},
+                  "PrepaymentIndicator": {"type": "boolean", "$comment": "Indicates whether this adjustment is some form of prepayment (i.e. would normally serve to increase the arrears, for example a weekly rent paid monthly in advance) and a guaranteed future receipt (i.e. would normally serve to reduce the arrears, like a forthcoming guaranteed housing benefit receipt). If the Amount is non-zero, then this indicator must be true if the amount is positive, and false if the amount is negative."},
+                  "Period": {"type": "#/definitions/Period"},
+                  "RelatedPaymentDate": {"type": "date", "$comment": "The actual date of a prepayment (which by definition will be before the end of the arrears reporting period), or the anticipated future payment date (i.e. after the arrears reporting period end date)."}
+                },
+                "required": ["Amount","RelatedPaymentDate"]
+              }
+            },
+            "AdjustedArrearsAmount": {"type": "#/definitions/MonetaryAmount"},
+            "Tenant": {
+              "type": "object",
+              "properties": {
+                "Lease": {
+                  "type": "array",
+                  "items": 
+                  {
+                    "type": "object",
+                    "properties": {
+                      "MethodCode": {
+                        "type": "array",
+                        "items": {"type": "#/definitions/PaymentMethodCode", "$comment": "Identifies the method by which the rent in the lease will be settled."}
+                      },
+                      "TenureType": {"type": "#/definitions/TenureTypeCode", "$comment": "The type of tenure/rent that this lease is subject to"},
+                      "UnitReference": {
+                        "type": "array",
+                        "items": 
+                        {"type": "#/definitions/Reference"}
+                      }
+                    }
+                  }
+                },
+                "DepartmentName": {"type": "string"},
+                "Name": {"type": "#/definitions/PersonName"},
+                "Reference": {"type": "#/definitions/Reference"}
+              },
+              "required": ["Name"]
+            },
+            "CurrentTenantIndicator": {"type": "boolean", "$comment": "Indicates if this specific tenant, or this aggregation of multiple tenants, is/are current tenants or (if false) former tenants"},
+            "NumberOfAccounts": {"type": "integer", "$comment": "The total number of discrete arrears accounts included in this item. Only applies when this item represents an aggregate of multiple cases."},
+            "RentOrServiceChargeIndicator": {"type": "boolean", "$comment": "If true, these arears relate to rent or service charges; if false they relate to other costs (e.g. court, repairs or sundry)"},
+            "Categorization": {
+              "type": "array",
+              "items": 
+              {"type": "#/definitions/Categorization"}
+            },
+            "ArrearsBandMinimum": {"type": "#/definitions/MonetaryAmount"},
+            "ArrearsBandMaximum": {"type": "#/definitions/MonetaryAmount"},
+            "ArrearsAgeMinimum": {"type": "#/definitions/Duration"},
+            "ArrearsAgeMaximum": {"type": "#/definitions/Duration"},
+            "ManagementPatch": {"type": "string", "$comment": "If this arrears item represents an aggregation within a specific management patch (a geographic area defined for the pruposes of focussing arrears management activity), the name of the patch"},
+            "IncomeOfficer": {
+              "type": "object",
+              "properties": {
+                "DepartmentName": {"type": "string"},
+                "Name": {"type": "#/definitions/PersonName"},
+                "Reference": {"type": "#/definitions/Reference"}
+              },
+              "required": ["Name"]
+            },
+            "Comment": {
+              "type": "array",
+              "items": 
+              {"type": "#/definitions/Comment"}
+            }
+          }
+        }
+      },
+      "Comment": {
+        "type": "array",
+        "items": 
+        {"type": "#/definitions/Comment"}
+      }
+    }
+  }
+}

@@ -1,0 +1,248 @@
+{
+  "$schema": "http://www.oscre.org/referencedatamodel/Main/3.3",
+  "id": "http://www.oscre.org/ns/referencedatamodel/CustomerNeedsAssessment",
+  "definitions": {
+    "LastingPowerOfAttorneyTypeCode": {
+      "type": "string",
+      "enum": ["10","20"]
+    },
+    "Score": {
+                      "type": "object",
+                      "properties": {
+                        "Name": {"type": "string", "$comment": "The name of the score, question that was asked or axes on which this score occurs"},
+                        "CurrentScore": {"type": "string", "$comment": "The current or latest score (often this is the only score provided unless a comparative score is provided). This will typically be numeric, but other gradings - e.g. A-F - are also allowed)."},
+                        "Minimum": {"type": "string", "$comment": "The minimum possible score or rating - used for creating axes. If omitted, 0 should be assumed."},
+                        "Maximum": {"type": "string", "$comment": "The maximum possible score or rating - used for creating axes"}
+                      }
+                    },
+    "Party": {
+              "type": "object",
+              "properties": {
+                "Reference": {
+                  "type": "array",
+                  "items": 
+                  {"type": "#/definitions/Reference"}
+                },
+                "Organization": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {"type": "string", "$comment": "The full name of this organization\n\nTo specify any name related to this organization."},
+                    "Contact": {
+                      "type": "array",
+                      "items": 
+                      {
+                        "type": "object",
+                        "properties": {
+                          "Name": {"type": "#/definitions/PersonName"},
+                          "Reference": {"type": "#/definitions/Reference"},
+                          "Communication": {
+                            "type": "array",
+                            "items": 
+                            {
+                              "type": "object",
+                              "properties": {
+                                "Channel": {
+                                  "type": "object",
+                                  "properties": {
+                                    "Medium": {"type": "#/definitions/CommunicationMediumCode", "$comment": "Specifies whether the medium of communication is text, audio, video or other."},
+                                    "Code": {"type": "#/definitions/CommunicationChannelCode", "$comment": "Identifies the technology that is used for the communication, e.g. telephone or social media."}
+                                  }
+                                },
+                                "Value": {"type": "string", "$comment": "The value or address of the communication channel (e.g. phone number, email address,etc.)"},
+                                "Description": {"type": "string", "$comment": "Free text to provide further details about the Communication"},
+                                "NotAvailable": {"type": "boolean", "$comment": "Optional indicator to record that this commuication channel is not available. For example, to indicate that a particular person does not have an email address or modibe phone. This can be used to prevent the person being repeatedly asked to provide contact details they don't hvae."}
+                              }
+                            }
+                          }
+                        },
+                        "required": ["Name"]
+                      }
+                    }
+                  }
+                },
+                "Person": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {"type": "#/definitions/PersonName"},
+                    "Reference": {"type": "#/definitions/Reference"}
+                  },
+                  "required": ["Name"]
+                },
+                "Role": {"type": "string", "$comment": "This is a text field to describe the role of the party, only used with Other_Party."}
+              }
+            },
+    "PersonName": {
+                            "type": "object",
+                            "properties": {
+                              "Full": {"type": "string", "$comment": "A string of characters providing a name or set of names by which this person is known"},
+                              "Given": {"type": "string", "$comment": "Name or names, usually given to a person by his/her parents at birth, also known as forename, first name or Christian name."},
+                              "Family": {"type": "string", "$comment": "The name a person shares with members of his/her family, also known as surname."},
+                              "FamilyPrefix": {"type": "string", "$comment": "The textual description of any prefix that precedes this person's family name such as van, von etc. (Fred Van Blommestein)."},
+                              "Initials": {"type": "string", "$comment": "Generally in the form of a set of the initial letters of the Given and Middle names, optionally space-delimited."},
+                              "Title": {"type": "string", "$comment": "The textual description of any title associated with a specific person such as Dr.,  Ir. etc."},
+                              "Middle": {"type": "string", "$comment": "Name or names, usually given to a person by his/her parents at birth, other than the first name."}
+                            }
+                          },
+    "CommunicationChannelCode": {
+      "type": "string",
+      "enum": ["0","1","10","20","30","40","50","60","70","70-10","70-20","70-30","70-40","70-50","70-60","70-70","70-80","70-90","70-100"]
+    },
+    "CommunicationMediumCode": {
+      "type": "string",
+      "enum": ["0","10","10-10","10-20","20","30","30-10","30-20"]
+    },
+    "Reference": {
+                "type": "object",
+                "properties": {
+                  "ID": {"type": "string", "$comment": "The actual reference number or string used to identify a particular entity in a system or process."},
+                  "AllocatedBy": {"type": "string", "$comment": "An identifier of the organization and/or system that allocated this identifier - this could be the name of the organization and/or system or something that identifies the specific instance of a system or database where the ID originated."}
+                },
+                "required": ["ID"]
+              },
+    "NoneLowMedHighCode": {
+      "type": "string",
+      "enum": ["0","10","20","30"]
+    },
+    "CustomerNeedTypeCode": {
+      "type": "string",
+      "enum": ["0","10","10-10","10-20","10-30","10-40","10-50","20","30","30-10","30-20","40"]
+    }
+  },
+  "CustomerNeedsAssessment": {
+    "type": "object",
+    "properties": {
+      "Needs": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "TypeCode": {"type": "#/definitions/CustomerNeedTypeCode", "$comment": "Identifies the type of this specific need"},
+            "OtherType": {"type": "string", "$comment": "If the TypeCode is an 'other' codes specify the type of of this item here. This should be a few word summary - details can be provided elsewhere."},
+            "Description": {"type": "string", "$comment": "Optionally provide additional information or comments about this assessed item"},
+            "LevelCode": {"type": "#/definitions/NoneLowMedHighCode", "$comment": "Identifies the level of this particular item (risk, need etc.) on a simple scale from none to high."},
+            "Reference": {
+              "type": "array",
+              "items": 
+              {"type": "#/definitions/Reference"}
+            },
+            "DateTime": {"type": "date-time", "$comment": "The date and time that this risk or need was assessed and identified"},
+            "AssessedBy": {"type": "#/definitions/Party"}
+          },
+          "required": ["AssessedBy"]
+        }
+      },
+      "Analysis": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "NeedReference": {
+              "type": "array",
+              "items": 
+              {"type": "#/definitions/Reference"}
+            },
+            "DateTime": {"type": "date-time", "$comment": "The date and time that this analysis was completed"},
+            "AnalyzedBy": {"type": "#/definitions/Party"},
+            "Details": {"type": "string", "$comment": "A narrative description of the analysis, including specific details, the frequency etc."},
+            "OtherProfessionalsInvolved": {
+              "type": "array",
+              "items": 
+              {"type": "#/definitions/Party"}
+            },
+            "ServiceUserViews": {"type": "string", "$comment": "Narrative to record the service user view about this analysis as appropriate."},
+            "RelatedActionItemsReference": {
+              "type": "array",
+              "items": 
+              {"type": "#/definitions/Reference"}
+            },
+            "Actors": {"type": "string", "$comment": "A narrative description of the actors involved in this case, whether their role is as a potential cause of the risk or need, or the subject of a risk or need. This is narrative to accommodate the specific persons being unknown or non-specific (for example family members or neighbours)"},
+            "TriggerFactors": {"type": "string", "$comment": "A narrative description of current or previous factors that can trigger the risk or need."},
+            "Score": {
+              "type": "array",
+              "items": 
+              {
+                "type": "object",
+                "properties": {
+                  "Score": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": 
+                    {"type": "#/definitions/Score"}
+                  },
+                  "PreviousScore": {
+                    "type": "array",
+                    "items": 
+                    {"type": "#/definitions/Score"}
+                  },
+                  "DateTime": {"type": "date-time", "$comment": "The date and time that these scores were established - i.e. the date and time that the information was collected from the subject or that any test or assessment was conducted."},
+                  "PreviousDateTime": {"type": "date-time", "$comment": "The date and time that the previous scores provided were established."},
+                  "Description": {"type": "string", "$comment": "A narrative description of what these scores are, including information about the previous scores."},
+                  "Categorization": {
+                    "type": "array",
+                    "items": 
+                    {
+                      "type": "object",
+                      "properties": {
+                        "Type": {"type": "string", "$comment": "The type of the category that this categorization belongs to, e.g. \"Portfolio\", \"Country\", or \"RICS Red Book\""},
+                        "Category": {"type": "string", "$comment": "The category value of this categorization, e.g. \"Class A Offices\", or \"Canada\""},
+                        "VersionUsed": {"type": "string", "$comment": "If applicable, the version or edition of the categorization used e.g. for RICS Red Book categorizations this may contain the edition: \"2015 Edition\""},
+                        "SubCategory": {"type": "string", "$comment": "If applicable, the sub-category of this categorization (i.e. a subcategory within the 'Category' chosen above)"}
+                      }
+                    }
+                  }
+                },
+                "required": ["Score","DateTime"]
+              }
+            }
+          },
+          "required": ["AnalyzedBy","Details","Actors","TriggerFactors"]
+        }
+      },
+      "Review": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "DateTime": {"type": "date-time", "$comment": "The date and time that the review of the file took place"},
+            "ConductedBy": {"type": "#/definitions/Party"},
+            "Comments": {"type": "string", "$comment": "Any comments made by the reviewer"}
+          },
+          "required": ["ConductedBy"]
+        }
+      },
+      "Customer": {
+        "type": "object",
+        "properties": {
+          "Name": {"type": "#/definitions/PersonName"},
+          "Reference": {"type": "#/definitions/Reference"},
+          "BirthDate": {"type": "date", "$comment": "To specify the date or date time of the birth of this person.\n\nThe date of birth"},
+          "LastingPowerOfAttorney": {
+            "type": "array",
+            "items": 
+            {
+              "type": "object",
+              "properties": {
+                "CapacityType": {"type": "#/definitions/LastingPowerOfAttorneyTypeCode", "$comment": "Determines the capacity in which the specified person is acting on behalf of the subject"},
+                "GrantedTo": {"type": "#/definitions/Party"},
+                "FromDate": {"type": "date-time", "$comment": "The date from which the power was or will be granted"},
+                "ToDate": {"type": "date-time", "$comment": "The date on which the power ceases to be granted, if applicable"}
+              }
+            }
+          }
+        },
+        "required": ["Name"]
+      },
+      "DateTime": {"type": "date-time", "$comment": "The date and time that this assessment was completed"},
+      "AssessedBy": {"type": "#/definitions/Party"},
+      "OtherProfessionalsInvolved": {
+        "type": "array",
+        "items": 
+        {"type": "#/definitions/Party"}
+      }
+    },
+    "required": ["Customer","AssessedBy"]
+  }
+}

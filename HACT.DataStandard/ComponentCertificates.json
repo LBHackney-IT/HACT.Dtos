@@ -1,0 +1,117 @@
+{
+  "$schema": "http://www.oscre.org/referencedatamodel/Main/3.3",
+  "id": "http://www.oscre.org/ns/referencedatamodel/ComponentCertificates",
+  "definitions": {
+    "Party": {
+              "type": "object",
+              "properties": {
+                "Reference": {
+                  "type": "array",
+                  "items": 
+                  {"type": "#/definitions/Reference"}
+                },
+                "Organization": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {"type": "string", "$comment": "The full name of this organization\n\nTo specify any name related to this organization."},
+                    "Reference": {
+                      "type": "array",
+                      "items": 
+                      {"type": "#/definitions/Reference"}
+                    }
+                  }
+                },
+                "Person": {
+                  "type": "object",
+                  "properties": {
+                    "Name": {
+                      "type": "object",
+                      "properties": {
+                        "Full": {"type": "string", "$comment": "A string of characters providing a name or set of names by which this person is known"},
+                        "Given": {"type": "string", "$comment": "Name or names, usually given to a person by his/her parents at birth, also known as forename, first name or Christian name."},
+                        "Family": {"type": "string", "$comment": "The name a person shares with members of his/her family, also known as surname."},
+                        "FamilyPrefix": {"type": "string", "$comment": "The textual description of any prefix that precedes this person's family name such as van, von etc. (Fred Van Blommestein)."},
+                        "Initials": {"type": "string", "$comment": "Generally in the form of a set of the initial letters of the Given and Middle names, optionally space-delimited."},
+                        "Title": {"type": "string", "$comment": "The textual description of any title associated with a specific person such as Dr.,  Ir. etc."},
+                        "Middle": {"type": "string", "$comment": "Name or names, usually given to a person by his/her parents at birth, other than the first name."}
+                      }
+                    },
+                    "Reference": {"type": "#/definitions/Reference"}
+                  },
+                  "required": ["Name"]
+                },
+                "Name": {"type": "string", "$comment": "The name of the Party. This is the Organization name, or the individual's full name. If a Partnership, then list four partners' names. If the named Party is described in the agreement as acting as Nominee or trustee for another Entity then the Name of the other Entity should be included here. For example: \"John Smith acting as trustee for the PISCES Pension Fund\"."}
+              },
+              "required": ["Name"]
+            },
+    "Reference": {
+          "type": "object",
+          "properties": {
+            "ID": {"type": "string", "$comment": "The actual reference number or string used to identify a particular entity in a system or process."},
+            "AllocatedBy": {"type": "string", "$comment": "An identifier of the organization and/or system that allocated this identifier - this could be the name of the organization and/or system or something that identifies the specific instance of a system or database where the ID originated."}
+          },
+          "required": ["ID"]
+        },
+    "ServicingOrCommissioningCertificationCode": {
+      "type": "string",
+      "enum": ["10","20","30"]
+    },
+    "ComponentCertificationTypeCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","40","50","60","70","80","90","100","110","120","130","140","150","160","170","180","190","200","210","220","230","240","250","260","270","280","290","300","310","320","330","340","350","360","370","380","390","400","410","420","460","460-10","460-20","460-30","460-40","460-50","460-60","460-70","470","470-10","470-20","470-30","470-40","470-50","470-60","480","480-10","480-20","480-30","480-40","480-50","480-60","480-70","480-80","480-90","480-100","480-110","480-120","490","490-10","490-20","490-30","490-40","500","510","520","530","540","550","560","570","570-10","570-20","570-30","570-40","570-50","580","590","600","600-10","600-20","610","620","620-10","620-20","630","640","650","660","670","670-10","670-20","670-30","680","680-10","680-20","690","700","710","720","730","740","750","760","770","780","790","790-10","790-20","790-30","800","810","820","830","840","850","860","870","880","890"]
+    }
+  },
+  "ComponentCertificates": {
+    "type": "object",
+    "properties": {
+      "RelevantFramework": {"type": "string", "$comment": "The relevant authority, compliance or regulatory framework that requires this certification. For example, \"LGSR\" - Landlord Gas Safety Record, part of the UK Gas Safety (Installation and Use) Regulations 2018"},
+      "Type": {"type": "#/definitions/ComponentCertificationTypeCode", "$comment": "Indicates what specific type of safety certificate this is, or \"other\""},
+      "ServicingOrCommissioningCertification": {"type": "#/definitions/ServicingOrCommissioningCertificationCode", "$comment": "Specifies whether this certification covers the component's commissioning, servicing or both"},
+      "ComponentReference": {
+        "type": "array",
+        "items": 
+        {"type": "#/definitions/Reference"}
+      },
+      "RequiredAction": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "ItemName": {"type": "string", "$comment": "A short name for the action - usually a few words or very short sentence."},
+            "Deadline": {"type": "date-time", "$comment": "If applicable, an extrinsic date by which this action item must be completed to avoid some adverse consequence."},
+            "DeadlineReason": {"type": "string", "$comment": "A narrative description of why the deadline date applies - for example the date of a court hearing or effective date of an eviction notice."},
+            "Responsible": {"type": "#/definitions/Party"},
+            "DescriptionComment": {"type": "string", "$comment": "A free form text field that contains the notations relevant to the Work Order"}
+          },
+          "required": ["DescriptionComment"]
+        }
+      },
+      "ApprovedBy": {"type": "#/definitions/Party"},
+      "ApprovalDate": {"type": "date-time", "$comment": "The date (and time) that the approval was given"},
+      "Title": {"type": "string", "$comment": "The title of the certificate - for example \"Gas Safety Certificate\""},
+      "DateIssued": {"type": "date", "$comment": "The date that this safety certificate was issued (i.e. the date of the inspection). This may before the Valid From date in situations where the regulation permits inspections to be carried out in advance of the anniversary of the preceeding inspection."},
+      "Number": {"type": "#/definitions/Reference"},
+      "Certificate": {
+        "type": "object",
+        "properties": {
+          "Filename": {"type": "string", "$comment": "The file system name of the file that is attached - used as the default or suggested name if the file is 'saved'."},
+          "AsOfDate": {"type": "date", "$comment": "The last date for which the information in the attachment has been verified to be current. Also the effective date, for example the date a photograph was taken."},
+          "CreationDateTime": {"type": "date-time", "$comment": "Date and time a document or attachment was created"},
+          "Reference": {
+            "type": "array",
+            "items": 
+            {"type": "#/definitions/Reference"}
+          },
+          "URI": {"type": "string", "$comment": "If the attachment is available via a link, the uniform resource identifier (URI) of the attachment. This may be a public link, or a private link to which the recipient has access."},
+          "Title": {"type": "string", "$comment": "Title or caption for the attached file or document"},
+          "EmbeddedFileBinaryObject": {"type": "string", "$comment": "An electronic representation of the attachment encoded into text using Base64 content encoding. For more details on this encoding, see https://en.wikipedia.org/wiki/Base64"},
+          "CopyrightNotices": {"type": "string", "$comment": "Text description of any legal or copyright notices that may apply to the file in question"}
+        }
+      },
+      "ValidFrom": {"type": "date", "$comment": "When the certification is/was valid from. This may be after the date of the inspection, as described in the Date Issued attribute."},
+      "ValidTo": {"type": "date", "$comment": "When the certification is valid to or expires/requires renewal"},
+      "CertifiedBy": {"type": "#/definitions/Party"}
+    }
+  }
+}

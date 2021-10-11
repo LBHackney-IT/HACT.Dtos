@@ -1,0 +1,93 @@
+{
+  "$schema": "http://www.oscre.org/referencedatamodel/HACT/3.2",
+  "id": "http://www.oscre.org/ns/referencedatamodel/PropertyTypes",
+  "definitions": {
+    "PropertySubtypeCodeC0": {
+      "type": "string",
+      "enum": ["07-01-00","07-01-10","07-01-20","07-02-00","07-03-00","07-04-00","07-05-00","07-06-00","07-07-00","07-09-00","07-09-10","07-10-00","07-11-00","07-12-00","07-12-10","07-12-20","07-12-30","07-12-40"]
+    },
+    "PropertyPrimaryTypeCode": {
+      "type": "string",
+      "enum": ["01-00-00","02-00-00","03-00-00","04-00-00","05-00-00","06-00-00","07-00-00","08-00-00","09-00-00","10-00-00","11-00-00","12-00-00","13-00-00"]
+    },
+    "TenureTypeCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","40","100","110","120","130","140","150","160","170","180","190","200","210","220","230","240","250"]
+    },
+    "GardenTypeCode": {
+      "type": "string",
+      "enum": ["10","20","30","40"]
+    },
+    "UnitPhysicalFormCode": {
+      "type": "string",
+      "enum": ["10","20","30","40"]
+    },
+    "VerticalRiseCode": {
+      "type": "string",
+      "enum": ["10","20","30"]
+    },
+    "PropertyPhysicalFormCode": {
+      "type": "string",
+      "enum": ["0","10","10-10","10-20","20","20-10","20-20","20-30","20-30-10","20-40","20-50","20-60","20-70","30","30-10","30-20","30-30","30-40"]
+    },
+    "PropertyAdjacencyCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","30-10","30-20","40","40-10","40-20"]
+    },
+    "ConstructionMethodCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","40","50","60","70","80","90","100","110","120","130","140","150","160","170","180","190","200","210","220","230","240","250","260","270","280","290","300","310","320","330","340","350"]
+    }
+  },
+  "PropertyTypes": {
+    "type": "object",
+    "properties": {
+      "PhysicalCharacteristics": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "PropertyExceeds18mFFLIndicator": {"type": "boolean", "$comment": "Indicates if the property exceeds 18m in height when measured from the ground to the finished floor level of the top storey (relating to fire safety codes specified in UK Building Regulations)"},
+            "ConstructionMethodCode": {"type": "#/definitions/ConstructionMethodCode"},
+            "YearBuiltDate": {"type": "date"},
+            "Adjacency": {"type": "#/definitions/PropertyAdjacencyCode", "$comment": "Describes the nature of the physical connection between this building and surrounding buildings, for example, detached or terraced"},
+            "FormCode": {"type": "#/definitions/PropertyPhysicalFormCode", "$comment": "Describes the form, shape and/or envelope of a building's construction and purpose"},
+            "VerticalRiseCode": {"type": "#/definitions/VerticalRiseCode", "$comment": "A code to classify the height of multistorey structures"}
+          }
+        }
+      },
+      "Unit": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "PhysicalCharacteristics": {
+              "type": "object",
+              "properties": {
+                "FormCode": {"type": "#/definitions/UnitPhysicalFormCode", "$comment": "Describes the form, shape and/or envelope of a unit (or demise) that is or is intended to be let or sold."},
+                "NumberOfSingleBedrooms": {"type": "integer", "$comment": "The number of distinct rooms equiped for a single bed/one person occupancy"},
+                "NumberOfDoubleBedrooms": {"type": "integer", "$comment": "The number of distinct rooms equiped for a double bed/two person occupancy"},
+                "GardenType": {"type": "#/definitions/GardenTypeCode", "$comment": "The type of rgarden - if any - this unit has exclusive access to (i.e. not including any communal or shared garden areas)"}
+              }
+            },
+            "InterestTenureType": {"type": "#/definitions/TenureTypeCode", "$comment": "The legal basis on which this interest is held"}
+          }
+        }
+      },
+      "EnergyEfficiencyIndicator": {"type": "boolean"},
+      "PropertyType": {
+        "type": "object",
+        "properties": {
+          "PropertyPrimaryTypeCode": {"type": "#/definitions/PropertyPrimaryTypeCode", "$comment": "The primary property type - e.g. agriculture, healthcare, industrial, multi-family/housing etc."},
+          "PropertySubtypeCode": {
+            "type": "array",
+            "items": {"type": "#/definitions/PropertySubtypeCodeC0", "$comment": "The sub type within the primary type - e.g. an aparemtn, terraced house, detached house etc."}
+          }
+        },
+        "required": ["PropertyPrimaryTypeCode"]
+      }
+    }
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "$schema": "http://www.oscre.org/referencedatamodel/HACT/3.2",
+  "id": "http://www.oscre.org/ns/referencedatamodel/HousemarkPLP",
+  "definitions": {
+    "PropertySubtypeCodeC0": {
+      "type": "string",
+      "enum": ["07-00-00","07-01-00","07-01-10","07-01-20","07-02-00","07-03-00","07-04-00","07-05-00","07-06-00","07-07-00","07-08-00","07-09-00","07-09-05","07-09-10","07-09-15","07-10-00","07-11-00","07-12-00","07-12-10","07-12-20","07-12-30","07-12-40","07-13-00"]
+    },
+    "Reference": {
+                "type": "object",
+                "properties": {
+                  "ID": {"type": "string", "$comment": "The actual reference number or string used to identify a particular item, request, order or instruction in a system or process."},
+                  "AllocatedBy": {"type": "string", "$comment": "An identifier of the organization and/or system that allocated this identifier - this could be the name of the organization and/or system or something that identifies the specific instance of a system or database where the ID originated. For example, when specifying an OS UPRN, this string should be \"UPRN\"."}
+                },
+                "required": ["ID"]
+              },
+    "NROSHUnitType": {
+      "type": "string",
+      "enum": ["10","10-10","10-20","10-30","10-40","10-50","10-60","20","30"]
+    },
+    "RepairingObligationExtentCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","40"]
+    },
+    "UnitPhysicalFormCodeC0": {
+      "type": "string",
+      "enum": ["20","30"]
+    },
+    "UnitStatusCodeC0": {
+      "type": "string",
+      "enum": ["10","20"]
+    },
+    "PropertyPhysicalFormCode": {
+      "type": "string",
+      "enum": ["0","10","10-10","10-20","20","20-10","20-20","20-30","20-30-10","20-40","20-50","20-60","20-70","30","30-10","30-20","30-30","30-40"]
+    },
+    "TenureTypeCodeC0": {
+      "type": "string",
+      "enum": ["10","20","180","190","200","210","220","230","240","250"]
+    },
+    "CoordinateReferenceSystemCodeC0": {
+      "type": "string",
+      "enum": ["4326","27700"]
+    }
+  },
+  "HousemarkPLP": {
+    "type": "object",
+    "properties": {
+      "Property": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "Reference": {
+              "type": "array",
+              "items": 
+              {"type": "#/definitions/Reference"}
+            },
+            "Address": {
+              "type": "object",
+              "properties": {
+                "Unit": {"type": "string", "$comment": "Use this field to hold the flat number or letter."},
+                "BuildingNumber": {"type": "string", "$comment": "The number of a building or house on a street of this address."},
+                "BuildingName": {"type": "string", "$comment": "The name of the building or house on a street of this address"},
+                "StreetName": {"type": "string", "$comment": "Name of a street or thoroughfare"},
+                "GeographicalLocation": {
+                  "type": "object",
+                  "properties": {
+                    "Longitude": {
+                      "type": "array",
+                      "items": {"type": "string", "$comment": "Geographic coordinate of longitude, easting or other orthogonally equivalent measure in the reference system indicated by CoordinateReferenceSystemCode, as a decimal fraction (+-180.000000). Positives are east and negatives are west."}
+                    },
+                    "Latitude": {
+                      "type": "array",
+                      "items": {"type": "string", "$comment": "Geographic coordinate of latitude, northting or other orthogonally equivalent measure in the reference system indicated by CoordinateReferenceSystemCode, as a decimal fraction (+-90.000000). Positives are north and negatives are south."}
+                    },
+                    "CoordinateReferenceSystemCode": {"type": "#/definitions/CoordinateReferenceSystemCodeC0", "$comment": "The common Code given in the EPSG (European Petroleum Survey Group) Geodetic Parameter Registry. The Registry is a structured repository of data required to:\na) identify coordinates such that those coordinates describe position unambiguously through a coordinate reference system (CRS) definition; and\nb) define transformations and conversions that allow coordinates to be changed from one CRS to another CRS.\nSee also: http://www.epsg.org/Geodetic.html"}
+                  }
+                },
+                "PostalCode": {"type": "string", "$comment": "The identifier for one or more properties according to the postal service of that country; a group of letters and/or numbers added to the postal address to assist in the sorting of mail. E.g. UK postcode or US zip code"}
+              }
+            },
+            "TenureType": {"type": "#/definitions/TenureTypeCodeC0", "$comment": "Legal Interest under which the land, on which the property is situated, is owned. Includes freehold; leashold; shared interest."},
+            "PhysicalCharacteristics": {
+              "type": "array",
+              "items": 
+              {
+                "type": "object",
+                "properties": {
+                  "YearBuiltDate": {"type": "date"},
+                  "FormCode": {"type": "#/definitions/PropertyPhysicalFormCode", "$comment": "Describes the form, shape and/or envelope of a building's construction and purpose"},
+                  "NumberOfBedrooms": {"type": "number", "$comment": "Number of bedrooms included in the property. Excludes studio apartments."}
+                }
+              }
+            },
+            "Unit": {
+              "type": "array",
+              "items": 
+              {
+                "type": "object",
+                "properties": {
+                  "StatusCode": {
+                    "type": "array",
+                    "items": {"type": "#/definitions/UnitStatusCodeC0", "$comment": "Indicates whether the unit is let, vacant or disposed of. A business rule should be applied indicating that if unit status=let then interest reference is mandatory."}
+                  },
+                  "PhysicalCharacteristics": {
+                    "type": "object",
+                    "properties": {
+                      "FormCode": {"type": "#/definitions/UnitPhysicalFormCodeC0", "$comment": "Describes the form, shape and/or envelope of a unit (or demise) that is or is intended to be let or sold."},
+                      "NumberOfBedrooms": {"type": "number", "$comment": "Number of bedrooms included in the property. Excludes studio apartments."}
+                    }
+                  },
+                  "Lease": {
+                    "type": "array",
+                    "items": 
+                    {
+                      "type": "object",
+                      "properties": {
+                        "IncomeAndArrearsSummary": {
+                          "type": "object",
+                          "properties": {
+                            "NumberOfEvictionsDueToRentArrearsToDate": {"type": "integer", "$comment": "From start of financial year to end of the specified quarter end."},
+                            "TotalRentDueToDateAmount": {"type": "number", "$comment": "The amount of money in the specified currency"},
+                            "TotalServiceChargeDueToDateAmount": {"type": "number", "$comment": "The amount of money in the specified currency"},
+                            "TotalRentAndServicChargeCollectedToDateAmount": {"type": "number", "$comment": "The amount of money in the specified currency"},
+                            "TotalCurrentTenantArrearsAmount": {"type": "number", "$comment": "The amount of money in the specified currency"},
+                            "TotalFormerTenantArrearsAmount": {"type": "number", "$comment": "The amount of money in the specified currency"}
+                          },
+                          "required": ["TotalRentDueToDateAmount","TotalServiceChargeDueToDateAmount","TotalRentAndServicChargeCollectedToDateAmount","TotalCurrentTenantArrearsAmount","TotalFormerTenantArrearsAmount"]
+                        },
+                        "LandlordRepairingObligationExtentCode": {"type": "#/definitions/RepairingObligationExtentCode", "$comment": "Extent of the repairing obligation"},
+                        "LeadTenantUniversalCreditClaimant": {"type": "boolean", "$comment": "Specifies if this tenant current claims Universal Credit."}
+                      }
+                    }
+                  },
+                  "Void": {
+                    "type": "array",
+                    "items": 
+                    {
+                      "type": "object",
+                      "properties": {
+                        "EndOfTenancyDate": {"type": "date", "$comment": "The date on which the previous tenancy actually ended (or will end)"},
+                        "InvolvedInPlannedWorksProject": {"type": "boolean", "$comment": "Is this void part of a planned works project (and therefore potentially subject to a delay before letting/disposal)"},
+                        "VoidWorksCompletedDate": {"type": "date", "$comment": "The date on which all of the works required during the void have been completed."},
+                        "SucceedingLease": {
+                          "type": "object",
+                          "properties": {
+                            "FirstDayOfTermDate": {"type": "date", "$comment": "The date of the first day of the Lease term.  This may not necessarily be the same date that appears on the Lease as this date is always inclusive of the term start date.  This is NOT the day from which the beginning of the term is calculated."},
+                            "LandlordRepairingObligationExtentCode": {"type": "#/definitions/RepairingObligationExtentCode", "$comment": "Extent of the repairing obligation"}
+                          }
+                        },
+                        "TotalRentAndServiceChargeLossAmount": {"type": "number", "$comment": "The amount of money in the specified currency"}
+                      },
+                      "required": ["TotalRentAndServiceChargeLossAmount"]
+                    }
+                  }
+                }
+              }
+            },
+            "PredominantNROSHUnitType": {"type": "#/definitions/NROSHUnitType", "$comment": "The type (as defined by the Regultor for Social Housing) or the majority of the units in this property."},
+            "EnergyRating": {
+              "type": "array",
+              "items": 
+              {
+                "type": "object",
+                "properties": {
+                  "OrganizationName": {
+                    "type": "array",
+                    "items": {"type": "string", "$comment": "Organization that defines the rating scheme, eg \"BREEAM\", \"SAP EPC\" (a number between 1 and a 100), or \"EPC\" (letter A - G)"}
+                  },
+                  "Index": {
+                    "type": "array",
+                    "items": {"type": "string", "$comment": "Where the rating is expressed as a number, the numeric value of the applicable rating"}
+                  }
+                }
+              }
+            },
+            "Site": {
+              "type": "object",
+              "properties": {
+                "Name": {"type": "string", "$comment": "Formal Name. Eg Corporate Headquarters site"},
+                "WorkOrder": {
+                  "type": "array",
+                  "items": 
+                  {
+                    "type": "object",
+                    "properties": {
+                      "ActualStartDateTime": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {"type": "date-time", "$comment": "Time, Day, Month and Year of when the work activity specified in the Work Order commences"}
+                      },
+                      "ActualCompletionDateTime": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": {"type": "date-time", "$comment": "Time, Day, Month and Year of when the work activity specified in the work order can be completed based upon technician planned work load."}
+                      },
+                      "Reference": {
+                        "type": "array",
+                        "minItems": 1,
+                        "items": 
+                        {"type": "#/definitions/Reference"}
+                      },
+                      "TotalNumberOfAppointmentsMade": {"type": "integer", "$comment": "Enter the number of 'appointments made' (ie the number of appointments actually made, excluding any cancelled in advance by tenant or landlord) for the period benchmarked.\nAn appointment is an arrangement to carry out a responsive repair on a specific date (eg 'AM on 15 March' not 'only Mondays'). Anything more than a half-day appointment slot is not considered an appointment.\n\nAppointments are not usually considered necessary for emergency repairs, which should be completed as soon as possible. However, appointments can usually be made for other repairs whether inside or outside of the property and for communal areas (where an appointment could be made with a scheme manager, caretaker, or other member of staff or tenant who reported the repair). Some landlords also offer a same-day repair service for which they book an appointment. These appointments can be included so long as an appointment is actually made.\n\nWhere a repair requires multiple separate visits to complete, then the appointments for each separate visit should be counted. If a repair takes multiple continuous working days to complete, then the appointment should be counted as a single event which is the time slot at which the operative is due to arrive to start the work.\n\nIn Scotland, this a component of Charter regulatory PI 14."},
+                      "TotalNumberOfAppointmentsKept": {"type": "integer", "$comment": "An appointment should be considered to be kept if the contractor arrives within the specific time slot given to the tenant (an appointment has not been kept if the contractor arrives at midday and the appointment slot was 9am - 11am). An appointment should be considered to be kept by the landlord if it is broken by the tenant but kept by the landlord.\n\nAny appointments made that led to an abortive call (no access) are to be included as 'made' and 'kept'.\n\nIn Scotland, this a component of Charter regulatory PI 14."}
+                    },
+                    "required": ["ActualStartDateTime","ActualCompletionDateTime","Reference"]
+                  }
+                }
+              }
+            },
+            "PropertyManagerName": {"type": "string", "$comment": "For the purposes of this use case, Management is defined according to the \"NROSH+ Statistical Data Return[SDR] 2017/18 Large Provider Guidance Notes Versiion 1.3 (May 2018)\" (Regulator of Social Housing)"},
+            "OwnershipOwnerName": {"type": "string", "$comment": "For the purposes of this use case, Management is defined according to the \"NROSH+ Statistical Data Return[SDR] 2017/18 Large Provider Guidance Notes Versiion 1.3 (May 2018)\" (Regulator of Social Housing)"},
+            "PropertyTypePropertySubtypeCode": {
+              "type": "array",
+              "items": {"type": "#/definitions/PropertySubtypeCodeC0", "$comment": "The sub type within the primary type - e.g. an aparemtn, terraced house, detached house etc."}
+            }
+          },
+          "required": ["Site","PropertyManagerName","OwnershipOwnerName"]
+        }
+      },
+      "ReportingDate": {"type": "date", "$comment": "The date that is used to define the period that data in this submission relates to. Typically this will be 1st April up to and including the given date. At pesent reporting dates must be quarter ends."}
+    },
+    "required": ["ReportingDate"]
+  }
+}

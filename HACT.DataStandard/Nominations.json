@@ -1,0 +1,216 @@
+{
+  "$schema": "http://www.oscre.org/referencedatamodel/Main/3.3",
+  "id": "http://www.oscre.org/ns/referencedatamodel/Nominations",
+  "definitions": {
+    "AdaptationType": {
+      "type": "string",
+      "enum": ["10","20","20-10","20-20","20-30","30","40"]
+    },
+    "Communication": {
+              "type": "object",
+              "properties": {
+                "Channel": {
+                  "type": "object",
+                  "properties": {
+                    "Medium": {"type": "#/definitions/CommunicationMediumCode", "$comment": "Specifies whether the medium of communication is text, audio, video or other."},
+                    "Code": {"type": "#/definitions/CommunicationChannelCodeC0", "$comment": "Identifies the technology that is used for the communication, e.g. telephone or social media."}
+                  }
+                },
+                "Value": {"type": "string", "$comment": "The value or address of the communication channel (e.g. phone number, email address,etc.)"},
+                "Description": {"type": "string", "$comment": "Free text to provide further details about the Communication"}
+              }
+            },
+    "Identification": {
+            "type": "object",
+            "properties": {
+              "Type": {"type": "string", "$comment": "The type of document used to verify the identification of a person. E.g. Passport, Drivers Licence, National Insurance number\n\nIdentification type for a person - e.g. passport, NI, NHS"},
+              "Number": {"type": "string", "$comment": "The number associated with the Identification Type.\n\nThe number/id associated with the identificaiton type"},
+              "OriginalDocumentSeen": {"type": "boolean", "$comment": "Indicates that the original version of this doucment has been seen"}
+            }
+          },
+    "PersonName": {
+            "type": "object",
+            "properties": {
+              "Full": {"type": "string", "$comment": "A string of characters providing a name or set of names by which this person is known"},
+              "Given": {"type": "string", "$comment": "Name or names, usually given to a person by his/her parents at birth, also known as forename, first name or Christian name."},
+              "Family": {"type": "string", "$comment": "The name a person shares with members of his/her family, also known as surname."},
+              "Title": {"type": "string", "$comment": "The textual description of any title associated with a specific person such as Dr.,  Ir. etc."},
+              "Middle": {"type": "string", "$comment": "Name or names, usually given to a person by his/her parents at birth, other than the first name."}
+            }
+          },
+    "AntiSocialBehaviourBackground": {
+            "type": "object",
+            "properties": {
+              "Outcome": {"type": "string", "$comment": "A summary of the outcome of the action"},
+              "Issues": {"type": "string", "$comment": "A description of the anti-social behaviour issues presented"},
+              "HasHistoryOfAntiSocialBehaviour": {"type": "boolean", "$comment": "Does the applicant have a history of anti-social behaviour"},
+              "AntiSocialBehaviourCurrentIndicator": {"type": "boolean", "$comment": "Is there a current anti-social behaviour action underway"},
+              "PoliceRecords": {"type": "boolean", "$comment": "Are there any police records relating to the anti-social behaviour"},
+              "VictimOrPerpetrator": {"type": "boolean", "$comment": "true' if Perpetrator; 'false' if victim"},
+              "Type": {
+                "type": "array",
+                "items": {"type": "#/definitions/AntiSocialBehaviourTypeCode", "$comment": "The types of anti-social behaviour"}
+              }
+            }
+          },
+    "NominationOriginatorCode": {
+      "type": "string",
+      "enum": ["10","20","21","30","31","32","33","34"]
+    },
+    "SingleOrJointTenancyApplicationCode": {
+      "type": "string",
+      "enum": ["10","20"]
+    },
+    "CommunicationChannelCodeC0": {
+      "type": "string",
+      "enum": ["10","20","30","40","60","70","70-10","70-20","70-30","70-40","70-50","70-60","70-70","70-80","70-90","70-100"]
+    },
+    "CommunicationMediumCode": {
+      "type": "string",
+      "enum": ["0","10","10-10","10-20","20","30","30-10","30-20"]
+    },
+    "AntiSocialBehaviourTypeCode": {
+      "type": "string",
+      "enum": ["10","20","30"]
+    },
+    "CountryCode": {
+      "type": "string",
+      "enum": ["AD","AE","AF","AG","AI","AL","AM","AO","AQ","AR","AS","AT","AU","AW","AX","AZ","BA","BB","BD","BE","BF","BG","BH","BI","BJ","BL","BM","BN","BO","BQ","BR","BS","BT","BW","BY","BZ","CA","CC","CD","CF","CG","CH","CI","CK","CL","CM","CN","CO","CR","CU","CV","CW","CX","CY","CZ","DE","DJ","DK","DM","DO","DZ","EC","EE","EG","EH","ER","ES","ET","FI","FJ","FK","FM","FO","FR","GA","GB","GD","GE","GF","GG","GH","GI","GL","GM","GN","GP","GQ","GR","GS","GT","GU","GW","GY","HK","HM","HN","HR","HT","HU","ID","IE","IL","IM","IN","IO","IQ","IR","IS","IT","JE","JM","JO","JP","KE","KG","KH","KI","KM","KN","KP","KR","KW","KY","KZ","LA","LB","LC","LI","LK","LR","LS","LT","LU","LV","LY","MA","MC","MD","ME","MF","MG","MH","MK","ML","MM","MN","MO","MP","MQ","MR","MS","MT","MU","MV","MW","MX","MY","MZ","NA","NC","NE","NF","NG","NI","NL","NO","NP","NR","NU","NZ","OM","PA","PE","PF","PG","PH","PK","PL","PM","PN","PR","PS","PT","PW","PY","QA","RE","RO","RS","RU","RW","SA","SB","SC","SD","SE","SG","SH","SI","SJ","SK","SL","SM","SN","SO","SR","SS","ST","SV","SX","SY","SZ","TC","TD","TF","TG","TH","TJ","TK","TL","TM","TN","TO","TR","TT","TV","TW","TZ","UA","UG","UM","US","UY","UZ","VA","VC","VE","VG","VI","VN","VU","WF","WS","XZ","YE","YT","ZA","ZM","ZW"]
+    },
+    "HousingArrangementCode": {
+      "type": "string",
+      "enum": ["10","20","30","40","50","60","70","80","90","100","0"]
+    }
+  },
+  "Nominations": {
+    "type": "object",
+    "properties": {
+      "ApplicantOrNominee": {
+        "type": "object",
+        "properties": {
+          "CurrentHousingArrangement": {"type": "#/definitions/HousingArrangementCode", "$comment": "What is the prospective tenant's current housing arrangement"},
+          "PreviousAddress": {
+            "type": "array",
+            "items": 
+            {
+              "type": "object",
+              "properties": {
+                "FromMonth": {"type": "integer", "$comment": "The month the person began living at this address"},
+                "FromYear": {"type": "integer", "$comment": "The year the person began living at this address"},
+                "ToMonth": {"type": "integer", "$comment": "The month the person left this address"},
+                "ToYear": {"type": "integer", "$comment": "The year the person left this address"},
+                "HousingArrangement": {"type": "#/definitions/HousingArrangementCode", "$comment": "The housing arrangement of the applicant at their previous address"},
+                "Postbox": {"type": "string", "$comment": "A post office box number or a numbered post box in a post office assigned to a person or organization where letters for them are kept until called for, used as part of an address."},
+                "Room": {"type": "string", "$comment": "identifies the room, suite or apartment as part of an address."},
+                "Floor": {"type": "string", "$comment": "To identify, by name or number, of the floor in a building, as part of an address."},
+                "Plot": {"type": "string", "$comment": "A textual description of a small piece of land on which this address is located."},
+                "BuildingNumber": {"type": "string", "$comment": "The number of a building or house on a street of this address."},
+                "BuildingName": {"type": "string", "$comment": "The name of the building or house on a street of this address"},
+                "ComplexName": {"type": "string", "$comment": "Where the address is within a complex, scheme or site, the name of the complex"},
+                "StreetName": {"type": "string", "$comment": "Name of a street or thoroughfare"},
+                "CityName": {"type": "string", "$comment": "The name of the city, town or village of this address."},
+                "Country": {"type": "#/definitions/CountryCode", "$comment": "To provide country information related to this address.\n\nThe country of the address (not the country code)"},
+                "AddressLine": {
+                  "type": "array",
+                  "maxItems": 7,
+                  "items": {"type": "string", "$comment": "Where the address cannot be separated into the explicit fields, use this as the generic 'address lines' for the address"}
+                },
+                "Type": {"type": "string", "$comment": "Optional name of this address to distinguish it from other address attached to the same entity"},
+                "PostalCode": {"type": "string", "$comment": "The identifier for one or more properties according to the postal service of that country; a group of letters and/or numbers added to the postal address to assist in the sorting of mail. E.g. UK postcode or US zip code"}
+              }
+            }
+          },
+          "HistoryOfAntiSocialBehaviour": {"type": "#/definitions/AntiSocialBehaviourBackground"},
+          "Name": {"type": "#/definitions/PersonName"},
+          "BirthDate": {"type": "date", "$comment": "To specify the date or date time of the birth of this person.\n\nThe date of birth"},
+          "Identification": {"type": "#/definitions/Identification"},
+          "Communication": {
+            "type": "array",
+            "items": 
+            {"type": "#/definitions/Communication"}
+          },
+          "Age": {"type": "number", "$comment": "To specify any age measure related to this person such as his/her age at a particular point in time."},
+          "Salutation": {"type": "string", "$comment": "A formal sign or expression of greeting appropriate for this person."}
+        },
+        "required": ["Name"]
+      },
+      "ReasonForNomination": {"type": "string", "$comment": "For example homelessness, unsatisfactory housing, larger or smaller accommodation required. This is a candidate for a code list at some point."},
+      "LocalConnection": {"type": "string", "$comment": "If the applicant(s) have any connection to the locality, it can be provided here"},
+      "SingleOrJointTenancyApplication": {"type": "#/definitions/SingleOrJointTenancyApplicationCode", "$comment": "Indicates whether this is a single applicant or joint tenancy application"},
+      "NominationOriginator": {"type": "#/definitions/NominationOriginatorCode", "$comment": "Direct, CBL (and which system), Agency Nomination"},
+      "PriorityRanking": {"type": "integer", "$comment": "Where shortlist is provided by the nominating authority, this indicates the priority ranking of the applications, where the lowest number is the highest priority"},
+      "NumberOfSingleBedroomsRequired": {"type": "integer", "$comment": "The number of single bedrooms that the applicant(s) require"},
+      "NumberOfHouseholdMembers": {"type": "integer", "$comment": "The total number of household members, including the applicant(s)"},
+      "SpecifiedHouseholdMembers": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "DisabilitiesOrExtraCareNeeds": {"type": "string", "$comment": "Narrative description of the needs of other household members (other than the applicants)"},
+            "VulnerabilityDetails": {
+              "type": "object",
+              "properties": {
+                "MentalHealth": {"type": "boolean", "$comment": "true' indicates that there are mental health issues"},
+                "AntiSocialBehaviour": {"type": "#/definitions/AntiSocialBehaviourBackground"}
+              }
+            },
+            "Name": {"type": "#/definitions/PersonName"},
+            "BirthDate": {"type": "date", "$comment": "To specify the date or date time of the birth of this person.\n\nThe date of birth"},
+            "Identification": {"type": "#/definitions/Identification"},
+            "Communication": {
+              "type": "array",
+              "items": 
+              {"type": "#/definitions/Communication"}
+            },
+            "Age": {"type": "number", "$comment": "To specify any age measure related to this person such as his/her age at a particular point in time."},
+            "Salutation": {"type": "string", "$comment": "A formal sign or expression of greeting appropriate for this person."}
+          },
+          "required": ["Name"]
+        }
+      },
+      "AnyArrearsOrDebt": {"type": "boolean", "$comment": "Indicates whether there are any arrears or debt"},
+      "NominatingAuthorityNeedsAssesssmentOrRecommendation": {
+        "type": "object",
+        "properties": {
+          "Adaptations": {
+            "type": "array",
+            "items": 
+            {
+              "type": "object",
+              "properties": {
+                "Description": {"type": "string", "$comment": "A short description of the specific repair or adaptaion required"},
+                "TypeOfAdaptation": {"type": "#/definitions/AdaptationType", "$comment": "The type of adaptation"}
+              }
+            }
+          },
+          "BedroomSizeRequirements": {"type": "string", "$comment": "Narrative describing any specific size requirements of the bedroom(s), for example to accommodate medical equipment"}
+        }
+      },
+      "AvailableUnitAddress": {
+        "type": "object",
+        "properties": {
+          "Postbox": {"type": "string", "$comment": "A post office box number or a numbered post box in a post office assigned to a person or organization where letters for them are kept until called for, used as part of an address."},
+          "Room": {"type": "string", "$comment": "identifies the room, suite or apartment as part of an address."},
+          "Floor": {"type": "string", "$comment": "To identify, by name or number, of the floor in a building, as part of an address."},
+          "Plot": {"type": "string", "$comment": "A textual description of a small piece of land on which this address is located."},
+          "BuildingNumber": {"type": "string", "$comment": "The number of a building or house on a street of this address."},
+          "BuildingName": {"type": "string", "$comment": "The name of the building or house on a street of this address"},
+          "ComplexName": {"type": "string", "$comment": "Where the address is within a complex, scheme or site, the name of the complex"},
+          "StreetName": {"type": "string", "$comment": "Name of a street or thoroughfare"},
+          "CityName": {"type": "string", "$comment": "The name of the city, town or village of this address."},
+          "Country": {"type": "#/definitions/CountryCode", "$comment": "To provide country information related to this address.\n\nThe country of the address (not the country code)"},
+          "AddressLine": {
+            "type": "array",
+            "maxItems": 7,
+            "items": {"type": "string", "$comment": "Where the address cannot be separated into the explicit fields, use this as the generic 'address lines' for the address"}
+          },
+          "Type": {"type": "string", "$comment": "Optional name of this address to distinguish it from other address attached to the same entity"},
+          "PostalCode": {"type": "string", "$comment": "The identifier for one or more properties according to the postal service of that country; a group of letters and/or numbers added to the postal address to assist in the sorting of mail. E.g. UK postcode or US zip code"}
+        }
+      },
+      "NominatingAuthorityName": {"type": "string", "$comment": "The full name of this organization\n\nTo specify any name related to this organization."}
+    },
+    "required": ["ApplicantOrNominee"]
+  }
+}

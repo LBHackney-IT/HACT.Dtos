@@ -1,0 +1,124 @@
+{
+  "$schema": "http://www.oscre.org/referencedatamodel/Main/3.3",
+  "id": "http://www.oscre.org/ns/referencedatamodel/AggregateCaseMetrics",
+  "definitions": {
+    "CustomerRiskTypeCode": {
+      "type": "string",
+      "enum": ["0","10","10-0","10-10","10-20","10-30","10-40","10-50","10-60","20","20-0","20-20","20-10","20-30","20-40","20-50","30","30-0","30-10","30-20","30-30","40"]
+    },
+    "CareActionTypeCode": {
+      "type": "string",
+      "enum": ["10","10-10","10-20","10-30","10-40","10-50","10-60","10-70","10-80","10-90","10-100","10-110","10-120","10-130","10-140","10-150","10-160","10-170","10-180","20","20-10","20-20","20-30","20-40","20-50","20-60","20-70","20-80","20-90","20-100","20-110","20-120","20-130","20-140","20-150","20-160","20-170","20-180","20-190","20-200","20-210","20-220","20-230","20-240","30","30-10","30-20","30-30","30-40","30-50","30-60","30-70","30-80","30-90","30-100","30-110","30-120","30-130","30-140","30-150","30-160","30-170","30-180","30-190","30-200","30-210","30-220","30-230","30-240","30-250","30-260","30-270","30-280","30-290","30-300","30-310","30-320","30-330","30-340","30-350","30-360","30-370","30-380","30-390","30-400","30-410","30-420","40","40-20","40-30","40-40"]
+    },
+    "CareCaseClosureTypeCode": {
+      "type": "string",
+      "enum": ["10","20","30","40","50","60","70","80","90"]
+    },
+    "CareCaseStatusCode": {
+      "type": "string",
+      "enum": ["10","20","30","40","50-10","50-20","50-30"]
+    },
+    "CustomerNeedTypeCodeC0": {
+      "type": "string",
+      "enum": ["10","20","30","40"]
+    }
+  },
+  "AggregateCaseMetrics": {
+    "type": "object",
+    "properties": {
+      "EffectiveDateTime": {"type": "date-time", "$comment": "The date and time that this data set represents"},
+      "Description": {"type": "string", "$comment": "A narrative description of the data set"},
+      "Period": {
+        "type": "object",
+        "properties": {
+          "StartDateTime": {"type": "date-time", "$comment": "This is the start date for the period eg 20th January. It may (optionally) include a time on that date."},
+          "EndDateTime": {"type": "date-time", "$comment": "This is the end date for the period eg 20th June. It may (optionally) include a time on that date."}
+        }
+      },
+      "Measure": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "Description": {"type": "string", "$comment": "A narrative description of this particular measure (could be used as a label or note if this is already aggregated at the required reporting level)."},
+            "NumberOfCases": {"type": "integer", "$comment": "The total number of cases in the analyzed data set that meet all of the dimensional criteria sepcified"},
+            "CaseFileReference": {
+              "type": "array",
+              "items": 
+              {
+                "type": "object",
+                "properties": {
+                  "ID": {"type": "string", "$comment": "The actual reference number or string used to identify a particular entity in a system or process."},
+                  "AllocatedBy": {"type": "string", "$comment": "An identifier of the organization and/or system that allocated this identifier - this could be the name of the organization and/or system or something that identifies the specific instance of a system or database where the ID originated."}
+                },
+                "required": ["ID"]
+              }
+            },
+            "PrimaryNeedTypeCode": {
+              "type": "array",
+              "items": {"type": "#/definitions/CustomerNeedTypeCodeC0"}
+            },
+            "Department": {
+              "type": "array",
+              "items": {"type": "string", "$comment": "Specifies the department within the provider who dealt with the cases within this measure. This is useful when reporting across multiple departments."}
+            },
+            "StatusCode": {
+              "type": "array",
+              "items": {"type": "#/definitions/CareCaseStatusCode", "$comment": "Specifies the case status shared by all cases included in this measure"}
+            },
+            "ClosureTypeCode": {
+              "type": "array",
+              "items": {"type": "#/definitions/CareCaseClosureTypeCode", "$comment": "Specifies the nature of the closure of the cases in this measure, for example support compelted, or customer moved"}
+            },
+            "ActionTypeCode": {
+              "type": "array",
+              "items": {"type": "#/definitions/CareActionTypeCode", "$comment": "Specifies the specific actions or interventions that must be present in a case for it to appear in this measure."}
+            },
+            "RiskTypeCode": {
+              "type": "array",
+              "items": {"type": "#/definitions/CustomerRiskTypeCode", "$comment": "Specifies the specific risk types that must be present in a case for it to appear in this measure"}
+            },
+            "ScoreSet": {
+              "type": "array",
+              "items": 
+              {
+                "type": "object",
+                "properties": {
+                  "Score": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": 
+                    {
+                      "type": "object",
+                      "properties": {
+                        "Name": {"type": "string", "$comment": "The name of the score, question that was asked or axes on which this score occurs"},
+                        "CurrentScore": {"type": "string", "$comment": "In the context of a Care Case Measure, the Current Score is used to record the mean of all scores for this specific score and score set across all cases"},
+                        "Minimum": {"type": "string", "$comment": "The minimum possible score or rating - used for creating axes. If omitted, 0 should be assumed."},
+                        "Maximum": {"type": "string", "$comment": "The maximum possible score or rating - used for creating axes"}
+                      }
+                    }
+                  },
+                  "Categorization": {
+                    "type": "array",
+                    "items": 
+                    {
+                      "type": "object",
+                      "properties": {
+                        "Type": {"type": "string", "$comment": "The type of the category that this categorization belongs to, e.g. \"Portfolio\", \"Country\", or \"RICS Red Book\""},
+                        "Category": {"type": "string", "$comment": "The category value of this categorization, e.g. \"Class A Offices\", or \"Canada\""},
+                        "VersionUsed": {"type": "string", "$comment": "If applicable, the version or edition of the categorization used e.g. for RICS Red Book categorizations this may contain the edition: \"2015 Edition\""},
+                        "SubCategory": {"type": "string", "$comment": "If applicable, the sub-category of this categorization (i.e. a subcategory within the 'Category' chosen above)"}
+                      }
+                    }
+                  }
+                },
+                "required": ["Score"]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

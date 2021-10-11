@@ -1,0 +1,206 @@
+{
+  "$schema": "http://www.oscre.org/referencedatamodel/Main/3.3",
+  "id": "http://www.oscre.org/ns/referencedatamodel/PropertyMarketingInformation",
+  "definitions": {
+    "MonetaryAmount": {
+                                "type": "object",
+                                "properties": {
+                                  "CurrencyCode": {"type": "#/definitions/CurrencyCode", "$comment": "The currency of this monetary amount"},
+                                  "Amount": {"type": "number", "$comment": "The amount of money in the specified currency"}
+                                },
+                                "required": ["Amount"]
+                              },
+    "CurrencyCode": {
+      "type": "string",
+      "enum": ["AED","AFN","ALL","AMD","ANG","AOA","ARS","AUD","AWG","AZM","BAM","BBD","BDT","BGN","BHD","BIF","BMD","BND","BOB","BRL","BSD","BTN","BWP","BYR","BZD","CAD","CDF","CHE","CHF","CHW","CLP","CNY","COP","COU","CRC","CSD","CUP","CVE","CYP","CZK","DJF","DKK","DOP","DZD","EEK","EGP","ERN","ETB","EUR","FJD","FKP","GBP","GEL","GHC","GIP","GMD","GNF","GTQ","GYD","HKD","HNL","HRK","HTG","HUF","IDR","ILS","INR","IQD","IRR","ISK","JMD","JOD","JPY","KES","KGS","KHR","KMF","KPW","KRW","KWD","KYD","KZT","LAK","LBP","LKR","LRD","LSL","LTL","LVL","LYD","MAD","MDL","MGA","MKD","MMK","MNT","MOP","MRO","MTL","MUR","MVR","MWK","MXN","MYR","MZM","MZN","NAD","NGN","NIO","NOK","NPR","NZD","OMR","PAB","PEN","PGK","PHP","PKR","PLN","PYG","QAR","ROL","RON","RSD","RUB","RWF","SAR","SBD","SCR","SDD","SDG","SEK","SGD","SHP","SIT","SKK","SLL","SOS","SRD","SSP","STD","SVC","SYP","SZL","THB","TJS","TMM","TMT","TND","TOP","TRL","TRY","TTD","TWD","TZS","UAH","UGX","USD","USN","UYI","UYU","UZS","VEB","VEF","VND","VUV","WST","XAF","XAG","XAU","XBA","XBB","XBC","XBD","XCD","XDR","XOF","XPD","XPF","XPT","XSU","YER","ZAR","ZMK","ZMW","ZWD","ZWL"]
+    },
+    "SaleOrLeaseCode": {
+      "type": "string",
+      "enum": ["10","20","30"]
+    },
+    "RTDFParkingCode": {
+      "type": "string",
+      "enum": ["13","14","15","16","17","18","19","20","21","22","23","24"]
+    },
+    "ParkingLocationTypeCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","40","50","60","70","80"]
+    },
+    "AdaptationType": {
+      "type": "string",
+      "enum": ["10","20","20-10","20-20","20-30","30","40"]
+    },
+    "Reference": {
+          "type": "object",
+          "properties": {
+            "ID": {"type": "string", "$comment": "The actual reference number or string used to identify a particular entity in a system or process."},
+            "AllocatedBy": {"type": "string", "$comment": "An identifier of the organization and/or system that allocated this identifier - this could be the name of the organization and/or system or something that identifies the specific instance of a system or database where the ID originated."}
+          },
+          "required": ["ID"]
+        },
+    "RTDFOutsideSpaceCodeC0": {
+      "type": "string",
+      "enum": ["29","30","31","32","33","34","35","36"]
+    },
+    "UnitPhysicalFormCode": {
+      "type": "string",
+      "enum": ["10","20","30","40"]
+    },
+    "CountryCode": {
+      "type": "string",
+      "enum": ["AD","AE","AF","AG","AI","AL","AM","AO","AQ","AR","AS","AT","AU","AW","AX","AZ","BA","BB","BD","BE","BF","BG","BH","BI","BJ","BL","BM","BN","BO","BQ","BR","BS","BT","BW","BY","BZ","CA","CC","CD","CF","CG","CH","CI","CK","CL","CM","CN","CO","CR","CU","CV","CW","CX","CY","CZ","DE","DJ","DK","DM","DO","DZ","EC","EE","EG","EH","ER","ES","ET","FI","FJ","FK","FM","FO","FR","GA","GB","GD","GE","GF","GG","GH","GI","GL","GM","GN","GP","GQ","GR","GS","GT","GU","GW","GY","HK","HM","HN","HR","HT","HU","ID","IE","IL","IM","IN","IO","IQ","IR","IS","IT","JE","JM","JO","JP","KE","KG","KH","KI","KM","KN","KP","KR","KW","KY","KZ","LA","LB","LC","LI","LK","LR","LS","LT","LU","LV","LY","MA","MC","MD","ME","MF","MG","MH","MK","ML","MM","MN","MO","MP","MQ","MR","MS","MT","MU","MV","MW","MX","MY","MZ","NA","NC","NE","NF","NG","NI","NL","NO","NP","NR","NU","NZ","OM","PA","PE","PF","PG","PH","PK","PL","PM","PN","PR","PS","PT","PW","PY","QA","RE","RO","RS","RU","RW","SA","SB","SC","SD","SE","SG","SH","SI","SJ","SK","SL","SM","SN","SO","SR","SS","ST","SV","SX","SY","SZ","TC","TD","TF","TG","TH","TJ","TK","TL","TM","TN","TO","TR","TT","TV","TW","TZ","UA","UG","UM","US","UY","UZ","VA","VC","VE","VG","VI","VN","VU","WF","WS","XZ","YE","YT","ZA","ZM","ZW"]
+    },
+    "PropertyPhysicalFormCode": {
+      "type": "string",
+      "enum": ["0","10","10-10","10-20","20","20-10","20-20","20-30","20-30-10","20-40","20-50","20-60","20-70","30","30-10","30-20","30-30","30-40"]
+    },
+    "PropertyAdjacencyCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","30-10","30-20","40","40-10","40-20"]
+    }
+  },
+  "PropertyMarketingInformation": {
+    "type": "object",
+    "properties": {
+      "Reference": {
+        "type": "array",
+        "items": 
+        {"type": "#/definitions/Reference"}
+      },
+      "Property": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "PhysicalCharacteristics": {
+              "type": "array",
+              "items": 
+              {
+                "type": "object",
+                "properties": {
+                  "YearBuiltDate": {"type": "date", "$comment": "Although specified as a date, the day and month may be ignored. However, if a more specific build date is known and required by context, month and/or day of month may be included."},
+                  "Adjacency": {"type": "#/definitions/PropertyAdjacencyCode", "$comment": "Describes the nature of the physical connection between this building and surrounding buildings, for example, detached or terraced"},
+                  "FormCode": {"type": "#/definitions/PropertyPhysicalFormCode", "$comment": "Describes the form, shape and/or envelope of a building's construction and purpose"},
+                  "NumberOfFloors": {"type": "number", "$comment": "Number of storeys in property or unit (dwelling, office etc.)."}
+                }
+              }
+            },
+            "Unit": {
+              "type": "array",
+              "items": 
+              {
+                "type": "object",
+                "properties": {
+                  "InitialMarketingDescription": {
+                    "type": "array",
+                    "items": {"type": "string", "$comment": "A summary description of this unit, typically used for marketing purposes"}
+                  },
+                  "Address": {
+                    "type": "object",
+                    "properties": {
+                      "CityName": {"type": "string", "$comment": "The name of the city, town or village of this address."},
+                      "Country": {"type": "#/definitions/CountryCode", "$comment": "To provide country information related to this address.\n\nThe country of the address (not the country code)"},
+                      "AddressLine": {
+                        "type": "array",
+                        "maxItems": 7,
+                        "items": {"type": "string", "$comment": "+\nWhen used to represent an address for Rightmove RTDF, address line 1 should be used for the RTDF House_Name_Number field"}
+                      },
+                      "PostalCode": {"type": "string", "$comment": "The identifier for one or more properties according to the postal service of that country; a group of letters and/or numbers added to the postal address to assist in the sorting of mail. E.g. UK postcode or US zip code"}
+                    }
+                  },
+                  "GoogleStreetView": {
+                    "type": "object",
+                    "properties": {
+                      "Latitude": {"type": "number", "$comment": "The latitude for the Street View image location."},
+                      "Longitude": {"type": "number", "$comment": "The longitude for the Street View image location."},
+                      "Heading": {"type": "number", "$comment": "The compass heading of the camera view. Values can range from 0 to 360, with both 0 and 360 indicating north, 90 indicating east, 180 indicating south and 270 indicating west."},
+                      "Pitch": {"type": "number", "$comment": "The upwards or downwards angle of the camera relative to the Street View vehicle. Positive values angle the camera upwards (with 90 degrees indicating straight up), while negative values angle the camera downwards (with -90 indicating straight down)."},
+                      "Zoom": {"type": "number", "$comment": "The amount of zoom for the Street View image. The default value is 2."}
+                    },
+                    "required": ["Latitude","Longitude"]
+                  },
+                  "PhysicalCharacteristics": {
+                    "type": "object",
+                    "properties": {
+                      "FormCode": {"type": "#/definitions/UnitPhysicalFormCode", "$comment": "Describes the form, shape and/or envelope of a unit (or demise) that is or is intended to be let or sold."},
+                      "NumberOfFloors": {"type": "number", "$comment": "Number of storeys in property or unit (dwelling, office etc.)."},
+                      "RTDFOutsideSpaceCode": {
+                        "type": "array",
+                        "items": {"type": "#/definitions/RTDFOutsideSpaceCodeC0", "$comment": "Proprietary Rightmove RTDF outside space choices"}
+                      },
+                      "EntranceFloor": {
+                        "type": "array",
+                        "items": 
+                        {
+                          "type": "object",
+                          "properties": {
+                            "Name": {"type": "string", "$comment": "Name of Floor or Level within a building.  Includes all accessible levels of a building, including the roof level, mezzanines, interstitial spaces, basements, sub-basements and crawlspaces.   Description of floor or level, not abbreviated (e.g., basement, first-floor, mezzanine, roof, etc.); apply standards, not necessarily a VVL)"},
+                            "FloorNumber": {"type": "number", "$comment": "This is the Floor Number e.g. -1, 0, 1. For floors that do not have a natural numeric label, this may be omitted, or interpolated between or around floors that do have numeric labels - for example the 'Ground Floor' maye be identified with number '0'."},
+                            "AccessibleViaElevator": {"type": "boolean", "$comment": "True if this floor is accessible using an elevator/lift."},
+                            "Reference": {
+                              "type": "array",
+                              "items": 
+                              {"type": "#/definitions/Reference"}
+                            }
+                          }
+                        }
+                      },
+                      "NumberOfBedrooms": {"type": "number", "$comment": "Number of bedrooms included in the property. Excludes studio apartments."},
+                      "NumberOfBathrooms": {"type": "number", "$comment": "Number of bathrooms included in the property."},
+                      "NumberOfReceptionRooms": {"type": "number", "$comment": "Number of reception rooms included in the property."},
+                      "AdaptationsAndAccessTypeOfAdaptation": {"type": "#/definitions/AdaptationType", "$comment": "The type of adaptation"}
+                    }
+                  },
+                  "CarParking": {
+                    "type": "array",
+                    "items": 
+                    {
+                      "type": "object",
+                      "properties": {
+                        "ParkingLocationTypeCode": {"type": "#/definitions/ParkingLocationTypeCode", "$comment": "Classifies the type of parking available"},
+                        "RTDFParking": {
+                          "type": "array",
+                          "items": {"type": "#/definitions/RTDFParkingCode", "$comment": "Proprietary Rightmove RTDF parking choices"}
+                        }
+                      }
+                    }
+                  },
+                  "Listing": {
+                    "type": "array",
+                    "items": 
+                    {
+                      "type": "object",
+                      "properties": {
+                        "SaleOrLeaseCode": {"type": "#/definitions/SaleOrLeaseCode"},
+                        "SalesInformation": {
+                          "type": "array",
+                          "items": 
+                          {
+                            "type": "object",
+                            "properties": {
+                              "AskingPriceAmount": {"type": "#/definitions/MonetaryAmount"},
+                              "UnexpiredLeaseTerm": {
+                                "type": "object",
+                                "properties": {
+                                  "Years": {"type": "integer", "$comment": "The number of complete years in this duration. When calculating an end date by adding this duration to a start date, the number of years are added first, before any other duration attributes."},
+                                  "Months": {"type": "integer", "$comment": "The number of complete months in this duration. When calculating an end date by adding this duration to a start date, the number of years are added first, then the number of months, before any other duration attributes."}
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "RentInformationCurrentRentPayableAmount": {"type": "#/definitions/MonetaryAmount"}
+                      },
+                      "required": ["SaleOrLeaseCode"]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

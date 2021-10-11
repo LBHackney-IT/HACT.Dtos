@@ -1,0 +1,38 @@
+{
+  "$schema": "http://www.oscre.org/referencedatamodel/Main/3.3",
+  "id": "http://www.oscre.org/ns/referencedatamodel/CareReferralOutcomeFeedback",
+  "definitions": {
+    "CareReferralFeedbackTypeCode": {
+      "type": "string",
+      "enum": ["0","10","20","30"]
+    },
+    "CareCaseClosureTypeCode": {
+      "type": "string",
+      "enum": ["10","20","30","40","50","60","70","80","90"]
+    },
+    "CareCaseStatusCode": {
+      "type": "string",
+      "enum": ["10","20","30","40","50-10","50-20","50-30"]
+    },
+    "Reference": {
+        "type": "object",
+        "properties": {
+          "ID": {"type": "string", "$comment": "The actual reference number or string used to identify a particular entity in a system or process."},
+          "AllocatedBy": {"type": "string", "$comment": "An identifier of the organization and/or system that allocated this identifier - this could be the name of the organization and/or system or something that identifies the specific instance of a system or database where the ID originated."}
+        },
+        "required": ["ID"]
+      }
+  },
+  "CareReferralOutcomeFeedback": {
+    "type": "object",
+    "properties": {
+      "OriginalReferralReference": {"type": "#/definitions/Reference"},
+      "CaseFileReference": {"type": "#/definitions/Reference"},
+      "CaseStatusCode": {"type": "#/definitions/CareCaseStatusCode", "$comment": "Informs the referrer of the high-level status of the case from the service provider's perspective - for example 'assessing referral, 'accepted', 'started in service' etc."},
+      "CaseClosureTypeCode": {"type": "#/definitions/CareCaseClosureTypeCode", "$comment": "If the case is now closed by the service provider, this provides the basis on which it was closed (e.g. successfully completed, support declined by customer etc.)"},
+      "AchievementsOrProgress": {"type": "string", "$comment": "A narrative description of what was achieved during the intervention, or notes to update the referrer on progress."},
+      "FeedbackType": {"type": "#/definitions/CareReferralFeedbackTypeCode", "$comment": "Specifies what kind of feedback is being provided - e.g. status update, interim achievements, final outcomes"}
+    },
+    "required": ["OriginalReferralReference","CaseFileReference"]
+  }
+}

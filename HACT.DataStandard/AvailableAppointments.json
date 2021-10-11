@@ -1,0 +1,60 @@
+{
+  "$schema": "http://www.oscre.org/referencedatamodel/Main/3.3",
+  "id": "http://www.oscre.org/ns/referencedatamodel/AvailableAppointments",
+  "definitions": {
+    "Reference": {
+        "type": "object",
+        "properties": {
+          "ID": {"type": "string", "$comment": "The actual reference number or string used to identify a particular entity in a system or process."},
+          "Description": {"type": "string", "$comment": "An optional description for the reference, or more detail about this reference or who has allocated the reference. For example, this can be used to specify that this reference is a bar code attached to some physical component."},
+          "AllocatedBy": {"type": "string", "$comment": "An identifier of the organization and/or system that allocated this identifier - this could be the name of the organization and/or system or something that identifies the specific instance of a system or database where the ID originated."}
+        },
+        "required": ["ID"]
+      }
+  },
+  "AvailableAppointments": {
+    "type": "object",
+    "properties": {
+      "WorkOrderReference": {"type": "#/definitions/Reference"},
+      "ExclusiveHoldDuration": {
+        "type": "object",
+        "properties": {
+          "Minutes": {"type": "integer", "$comment": "The number of complete minutes in this duration. When calculating an end date by adding this duration to a start date, the number of years are added first, then the months, then weeks, then days, then hours, then minutes, before any other duration attributes."},
+          "Seconds": {"type": "integer", "$comment": "The number of complete seconds in this duration. When calculating an end date by adding this duration to a start date, the number of years are added first, then the months, then weeks, then days, then hours, then minutes and finally seconds."}
+        }
+      },
+      "Appointment": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "RepairsProviderDegreeOfPreference": {"type": "integer", "$comment": "Indicates the degree to which the repairs provider prefers this appointment compared to the other appointments provided. The lower the number, the more the repairs provider prefers this appointment compared to the others. Any integers may be used to express a degree of preference, and multiple available appointments entities may have the same degree of preference. However, the relative size of the integers will be disregarded - only their numerical order will be relevant."},
+            "RepairsProviderPreferenceDescription": {"type": "string", "$comment": "A narrative description of why the repairs provider has given the degree of preference for this appointment - for example \"already have operative in area\"."},
+            "MeetsSLA": {"type": "boolean", "$comment": "Indicates if this available appointment satisfies the contractually agreed service level agreement (SLA). It may be the case that there are no available appointments that meet both the customer preferences and the service level agreement."},
+            "MeetsCustomerPreference": {"type": "boolean", "$comment": "Indicates if this available appointment satisfies any of the expressed customer preferences for appointment dates/times. If the customer has not expressed any preferences, this may be omitted or sepcified as false. If the customer has expressed preferences, but this provided available appointment does not meet any of the customers preferences, this must be sepcified as false."},
+            "CustomerDegreeOfPreference": {"type": "integer", "$comment": "If this available appointment meets one or more of the customers expressed preferences, then this is the lowest degree of preference of the customer's matching preferences."},
+            "Date": {"type": "date", "$comment": "The date of this appointment"},
+            "TimeOfDay": {
+              "type": "object",
+              "properties": {
+                "Name": {"type": "string", "$comment": "A narrative description of this appointment time. This is usually used for time windows where there is a common name, for example \"AM\" (meaning perhaps 8am - 12 noon), or \"School run\" (meaning 9.30am - 3pm)."},
+                "EarliestArrivalTime": {"type": "time", "$comment": "The earliest time that the appointment can start."},
+                "LatestArrivalTime": {"type": "time", "$comment": "The latest time that the appointment can start."},
+                "LatestCompletionTime": {"type": "time", "$comment": "The latest estimated time that the appointment will be completed."}
+              }
+            },
+            "WorkElementReference": {
+              "type": "array",
+              "items": 
+              {"type": "#/definitions/Reference"}
+            },
+            "Reference": {"type": "#/definitions/Reference"}
+          },
+          "required": ["TimeOfDay"]
+        }
+      }
+    },
+    "required": ["WorkOrderReference"]
+  }
+}

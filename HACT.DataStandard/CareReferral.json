@@ -1,0 +1,489 @@
+{
+  "$schema": "http://www.oscre.org/referencedatamodel/Main/3.3",
+  "id": "http://www.oscre.org/ns/referencedatamodel/CareReferral",
+  "definitions": {
+    "QuestionOrCriterionTypeCode": {
+      "type": "string",
+      "enum": ["10","20","20-10","20-20","20-30","30","30-10","30-20","30-30","40","40-10","40-20","50"]
+    },
+    "Attachment": {
+                    "type": "object",
+                    "properties": {
+                      "Filename": {"type": "string", "$comment": "The file system name of the file that is attached - used as the default or suggested name if the file is 'saved'."},
+                      "AsOfDate": {"type": "date", "$comment": "The last date for which the information in the attachment has been verified to be current. Also the effective date, for example the date a photograph was taken."},
+                      "CreationDateTime": {"type": "date-time", "$comment": "Date and time a document or attachment was created"},
+                      "Reference": {
+                        "type": "array",
+                        "items": 
+                        {"type": "#/definitions/Reference"}
+                      },
+                      "URI": {"type": "string", "$comment": "If the attachment is available via a link, the uniform resource identifier (URI) of the attachment. This may be a public link, or a private link to which the recipient has access."},
+                      "Title": {"type": "string", "$comment": "Title or caption for the attached file or document"},
+                      "EmbeddedFileBinaryObject": {"type": "string", "$comment": "An electronic representation of the attachment encoded into text using Base64 content encoding. For more details on this encoding, see https://en.wikipedia.org/wiki/Base64"},
+                      "Description": {"type": "string", "$comment": "A description of the contents of the attached file or document to help a reader establish if this is the correct file before opening"}
+                    }
+                  },
+    "CareServiceCriterion": {
+              "type": "object",
+              "properties": {
+                "Met": {"type": "boolean", "$comment": "When used in the context of specific Service User(s), indicates whether this criterion is met or not by the Service User(s) in the opinion of the referrer."},
+                "CompositeCriterion": {
+                  "type": "array",
+                  "items": 
+,
+    "CustomerNeedTypeCode": {
+      "type": "string",
+      "enum": ["0","10","10-10","10-20","10-30","10-40","10-50","20","30","30-10","30-20","40"]
+    },
+    "CareActionTypeCode": {
+      "type": "string",
+      "enum": ["10","10-10","10-20","10-30","10-40","10-50","10-60","10-70","10-80","10-90","10-100","10-110","10-120","10-130","10-140","10-150","10-160","10-170","10-180","20","20-10","20-20","20-30","20-40","20-50","20-60","20-70","20-80","20-90","20-100","20-110","20-120","20-130","20-140","20-150","20-160","20-170","20-180","20-190","20-200","20-210","20-220","20-230","20-240","30","30-10","30-20","30-30","30-40","30-50","30-60","30-70","30-80","30-90","30-100","30-110","30-120","30-130","30-140","30-150","30-160","30-170","30-180","30-190","30-200","30-210","30-220","30-230","30-240","30-250","30-260","30-270","30-280","30-290","30-300","30-310","30-320","30-330","30-340","30-350","30-360","30-370","30-380","30-390","30-400","30-410","30-420","40","40-20","40-30","40-40"]
+    },
+    "Party": {
+                    "type": "object",
+                    "properties": {
+                      "Reference": {
+                        "type": "array",
+                        "items": 
+                        {"type": "#/definitions/Reference"}
+                      },
+                      "Organization": {
+                        "type": "object",
+                        "properties": {
+                          "Name": {"type": "string", "$comment": "The full name of this organization\n\nTo specify any name related to this organization."},
+                          "Contact": {
+                            "type": "array",
+                            "items": 
+                            {
+                              "type": "object",
+                              "properties": {
+                                "Address": {
+                                  "type": "array",
+                                  "items": 
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "Unit": {"type": "string", "$comment": "The name or number of the unit within a site"},
+                                      "BuildingNumber": {"type": "string", "$comment": "The number of a building or house on a street of this address."},
+                                      "BuildingName": {"type": "string", "$comment": "The name of the building or house on a street of this address"},
+                                      "ComplexName": {"type": "string", "$comment": "Where the address is within a complex, scheme or site, the name of the complex"},
+                                      "StreetName": {"type": "string", "$comment": "Name of a street or thoroughfare"},
+                                      "CitySubDivision": {"type": "string", "$comment": "A text string identifying a division of a city, for example a local authority area, district or borough."},
+                                      "CityName": {"type": "string", "$comment": "The name of the city, town or village of this address."},
+                                      "CountrySubentityName": {"type": "string", "$comment": "The name that identifies the territorial division (a chief unit of local administration) of a country, as part of an address, For example a UK County, or a US State etc."},
+                                      "Country": {"type": "#/definitions/CountryCode", "$comment": "To provide country information related to this address.\n\nThe country of the address (not the country code)"},
+                                      "PostalCode": {"type": "string", "$comment": "The identifier for one or more properties according to the postal service of that country; a group of letters and/or numbers added to the postal address to assist in the sorting of mail. E.g. UK postcode or US zip code"}
+                                    }
+                                  }
+                                },
+                                "Name": {"type": "#/definitions/PersonName"},
+                                "Alias": {
+                                  "type": "array",
+                                  "items": 
+                                  {"type": "#/definitions/PersonName"}
+                                },
+                                "Communication": {
+                                  "type": "array",
+                                  "items": 
+                                  {"type": "#/definitions/Communication"}
+                                },
+                                "ContactPreferences": {"type": "#/definitions/ContactPreferences"},
+                                "CorrespondenceAddress": {"type": "#/definitions/PostalAddress"}
+                              },
+                              "required": ["Name"]
+                            }
+                          }
+                        }
+                      },
+                      "Person": {
+                        "type": "object",
+                        "properties": {
+                          "Name": {"type": "#/definitions/PersonName"},
+                          "Alias": {
+                            "type": "array",
+                            "items": 
+                            {"type": "#/definitions/PersonName"}
+                          },
+                          "Communication": {
+                            "type": "array",
+                            "items": 
+                            {"type": "#/definitions/Communication"}
+                          },
+                          "ContactPreferences": {"type": "#/definitions/ContactPreferences"},
+                          "CorrespondenceAddress": {"type": "#/definitions/PostalAddress"}
+                        },
+                        "required": ["Name"]
+                      },
+                      "Role": {"type": "string", "$comment": "This is a text field to describe the role of the party, only used with Other_Party."}
+                    }
+                  },
+    "ServiceUser": {
+          "type": "object",
+          "properties": {
+            "Alert": {
+              "type": "array",
+              "items": 
+              {
+                "type": "object",
+                "properties": {
+                  "Comments": {"type": "string", "$comment": "Specific details related to this alert - for example what specifically to be aware of, or sensible precautions to take."},
+                  "Type": {"type": "#/definitions/PersonAlertTypeCode", "$comment": "This provides the specific type of alert that is being flagged, e.g. 'don't visit alone'. NOTE: These alert types and associated comments must not be repeated verbatim on an operatives work order for privacy reasons. Only the information that is essential to the performance of the operatives work should be included, which may be  abstracted or summarized from the details found in the AlertRegardingPerson entity."}
+                },
+                "required": ["Type"]
+              }
+            },
+            "DisabilitiesOrExtraCareNeeds": {"type": "string", "$comment": "A narrative description of any disabilities or extra care needs"},
+            "EconomicStatusAndAffordability": {
+              "type": "object",
+              "properties": {
+                "IncomeAndExpenditure": {
+                  "type": "array",
+                  "items": 
+                  {
+                    "type": "object",
+                    "properties": {
+                      "OtherDescription": {"type": "string", "$comment": "If type is 'other', then describe what this income or expenditure is"},
+                      "IncomeOrExpenditureType": {"type": "#/definitions/IncomeOrExpenditureTypeCode", "$comment": "The type of this income or expenditure, or other"},
+                      "IncomeOrExpenditure": {"type": "#/definitions/IncomeOrExpenditureCode", "$comment": "Indicates whether this is income or expenditure"},
+                      "AmountBasis": {"type": "#/definitions/IncomeOrExpenditureAmountBasisCode", "$comment": "Indicates whether this is income or expenditure"},
+                      "AnnualAmount": {"type": "#/definitions/MonetaryAmount"}
+                    },
+                    "required": ["AnnualAmount"]
+                  }
+                },
+                "Entitlements": {
+                  "type": "array",
+                  "items": 
+                  {
+                    "type": "object",
+                    "properties": {
+                      "Type": {"type": "#/definitions/UKEntitlementTypeCode", "$comment": "Housing Benefit, etc."},
+                      "Periodicity": {"type": "#/definitions/FrequencyCodeC0", "$comment": "Periodicity of amount - weekly, monthly, annually etc."},
+                      "Amount": {"type": "#/definitions/MonetaryAmount"}
+                    },
+                    "required": ["Type","Periodicity","Amount"]
+                  }
+                },
+                "TotalAnnualIncome": {"type": "#/definitions/MonetaryAmount"},
+                "ValueOfSavingsSharesPropertyAndLand": {"type": "#/definitions/MonetaryAmount"}
+              }
+            },
+            "EthnicOrigin": {"type": "#/definitions/EthnicOriginCode", "$comment": "Ethnic origin"},
+            "Language": {"type": "#/definitions/LanguageCode", "$comment": "The primary language used"},
+            "Religion": {"type": "#/definitions/ReligionCode", "$comment": "Religion"},
+            "Gender": {"type": "#/definitions/GenderCode", "$comment": "A code indicating the self-identified gender of a person"},
+            "OtherGender": {"type": "string", "$comment": "Where Gender is 'Other', the self-identified Gender of the Person."},
+            "Name": {"type": "#/definitions/PersonName"},
+            "Alias": {
+              "type": "array",
+              "items": 
+              {"type": "#/definitions/PersonName"}
+            },
+            "MaritalCode": {"type": "#/definitions/MaritalStatusCodeC0", "$comment": "To specify  whether this person is married, single, or divorced."},
+            "BirthDate": {"type": "date", "$comment": "To specify the date or date time of the birth of this person.\n\nThe date of birth"},
+            "Sex": {"type": "#/definitions/SexCodeC0", "$comment": "A code indicating the biological sex of a person, including options for not specified or not known"},
+            "Communication": {
+              "type": "array",
+              "items": 
+              {"type": "#/definitions/Communication"}
+            },
+            "Age": {"type": "number", "$comment": "To specify any age measure related to this person such as his/her age at a particular point in time."},
+            "Citizenship": {"type": "#/definitions/CountryCodeC0", "$comment": "The country in which this person is legally a citizen"},
+            "Consent": {
+              "type": "array",
+              "items": 
+              {
+                "type": "object",
+                "properties": {
+                  "AdditionalInformation": {"type": "string", "$comment": "Additional qualifying information about the consent, for example who they have consented to share information with"},
+                  "NoticeText": {"type": "string", "$comment": "The text of the notice that has been consented to. Mayb be used instead of the Notice attachment."},
+                  "Notice": {"type": "#/definitions/Attachment"},
+                  "GivenOrRefused": {"type": "#/definitions/ConsentGivenOrRefusedCode", "$comment": "Whether this consent type has been given or refused."},
+                  "Reference": {
+                    "type": "array",
+                    "items": 
+                    {"type": "#/definitions/Reference"}
+                  }
+                }
+              }
+            },
+            "ContactPreferences": {"type": "#/definitions/ContactPreferences"},
+            "CorrespondenceAddress": {"type": "#/definitions/PostalAddress"},
+            "LastingPowerOfAttorney": {
+              "type": "array",
+              "items": 
+              {
+                "type": "object",
+                "properties": {
+                  "CapacityType": {"type": "#/definitions/LastingPowerOfAttorneyTypeCode", "$comment": "Determines the capacity in which the specified person is acting on behalf of the subject"},
+                  "GrantedTo": {"type": "#/definitions/Party"},
+                  "FromDate": {"type": "date-time", "$comment": "The date from which the power was or will be granted"},
+                  "ToDate": {"type": "date-time", "$comment": "The date on which the power ceases to be granted, if applicable"}
+                }
+              }
+            }
+          },
+          "required": ["Name"]
+        },
+    "PostalAddress": {
+              "type": "object",
+              "properties": {
+                "Unit": {"type": "string", "$comment": "The name or number of the unit within a site"},
+                "BuildingNumber": {"type": "string", "$comment": "The number of a building or house on a street of this address."},
+                "BuildingName": {"type": "string", "$comment": "The name of the building or house on a street of this address"},
+                "ComplexName": {"type": "string", "$comment": "Where the address is within a complex, scheme or site, the name of the complex"},
+                "StreetName": {"type": "string", "$comment": "Name of a street or thoroughfare"},
+                "CitySubDivision": {"type": "string", "$comment": "A text string identifying a division of a city, for example a local authority area, district or borough."},
+                "CityName": {"type": "string", "$comment": "The name of the city, town or village of this address."},
+                "CountrySubentityName": {"type": "string", "$comment": "The name that identifies the territorial division (a chief unit of local administration) of a country, as part of an address, For example a UK County, or a US State etc."},
+                "Country": {"type": "#/definitions/CountryCode", "$comment": "To provide country information related to this address.\n\nThe country of the address (not the country code)"},
+                "PostalCode": {"type": "string", "$comment": "The identifier for one or more properties according to the postal service of that country; a group of letters and/or numbers added to the postal address to assist in the sorting of mail. E.g. UK postcode or US zip code"}
+              }
+            },
+    "ContactPreferences": {
+              "type": "object",
+              "properties": {
+                "PreferredChannel": {"type": "#/definitions/CommunicationChannelCode", "$comment": "Indicates the preferred technology or platform - for example mobile phone, email, social media"},
+                "PreferredMedium": {"type": "#/definitions/CommunicationMediumCode", "$comment": "Indicates the preferred medium or mode of communication - for example, written (e.g. text) or audio (e.g. call)"},
+                "PreferBliss": {"type": "boolean", "$comment": "Indicates prefered contact medium"},
+                "PreferBritishSignLanguage": {"type": "boolean", "$comment": "Indicates prefered contact medium"},
+                "PreferDeafOrBlindCommunication": {"type": "boolean", "$comment": "Indicates prefered contact medium"},
+                "PreferInductionLoop": {"type": "boolean", "$comment": "Indicates prefered contact medium"},
+                "PreferLipReading": {"type": "boolean", "$comment": "Indicates prefered contact medium"},
+                "PreferMakaton": {"type": "boolean", "$comment": "Indicates prefered contact medium"},
+                "PreferMinicom": {"type": "boolean", "$comment": "Indicates prefered contact medium"},
+                "PreferredDaysAndTimesForContact": {"type": "string", "$comment": "Narrative description of the preferred days and times for contact"},
+                "PreferredSocialMediaPlatform": {"type": "#/definitions/SocialMediaPlatform", "$comment": "Indicates prefered contact medium"},
+                "PreferredSpokenLanguage": {"type": "#/definitions/LanguageCode", "$comment": "Indicates prefered contact medium"},
+                "PreferredWrittenLanguage": {"type": "#/definitions/LanguageCode", "$comment": "Indicates prefered contact medium"}
+              }
+            },
+    "Communication": {
+                "type": "object",
+                "properties": {
+                  "Channel": {
+                    "type": "object",
+                    "properties": {
+                      "Medium": {"type": "#/definitions/CommunicationMediumCode", "$comment": "Specifies whether the medium of communication is text, audio, video or other."},
+                      "Code": {"type": "#/definitions/CommunicationChannelCode", "$comment": "Identifies the technology that is used for the communication, e.g. telephone or social media."}
+                    }
+                  },
+                  "Value": {"type": "string", "$comment": "The value or address of the communication channel (e.g. phone number, email address,etc.)"},
+                  "NotAvailable": {"type": "boolean", "$comment": "Optional indicator to record that this commuication channel is not available. For example, to indicate that a particular person does not have an email address or modibe phone. This can be used to prevent the person being repeatedly asked to provide contact details they don't hvae."}
+                }
+              },
+    "LastingPowerOfAttorneyTypeCode": {
+      "type": "string",
+      "enum": ["10","20"]
+    },
+    "SocialMediaPlatform": {
+      "type": "string",
+      "enum": ["10","20","30","40","50","60","70","80","90","100","110","120","130","140","150","160","170"]
+    },
+    "Reference": {
+                          "type": "object",
+                          "properties": {
+                            "ID": {"type": "string", "$comment": "The actual reference number or string used to identify a particular entity in a system or process."},
+                            "AllocatedByCode": {"type": "#/definitions/RoleCodeC0", "$comment": "The role of the organization that has allocated the Reference."},
+                            "AllocatedBy": {"type": "string", "$comment": "An identifier of the organization and/or system that allocated this identifier - this could be the name of the organization and/or system or something that identifies the specific instance of a system or database where the ID originated."}
+                          },
+                          "required": ["ID"]
+                        },
+    "ConsentGivenOrRefusedCode": {
+      "type": "string",
+      "enum": ["10","20"]
+    },
+    "RoleCodeC0": {
+      "type": "string",
+      "enum": ["100","110"]
+    },
+    "CountryCodeC0": {
+      "type": "string",
+      "enum": ["AD","AE","AF","AG","AI","AL","AM","AO","AQ","AR","AS","AT","AU","AW","AX","AZ","BA","BB","BD","BE","BF","BG","BH","BI","BJ","BL","BM","BN","BO","BQ","BR","BS","BT","BW","BY","BZ","CA","CC","CD","CF","CG","CH","CI","CK","CL","CM","CN","CO","CR","CU","CV","CW","CX","CY","CZ","DE","DJ","DK","DM","DO","DZ","EC","EE","EG","EH","ER","ES","ET","FI","FJ","FK","FM","FO","FR","GA","GB","GD","GE","GF","GG","GH","GI","GL","GM","GN","GP","GQ","GR","GS","GT","GU","GW","GY","HK","HM","HN","HR","HT","HU","ID","IE","IL","IM","IN","IO","IQ","IR","IS","IT","JE","JM","JO","JP","KE","KG","KH","KI","KM","KN","KP","KR","KW","KY","KZ","LA","LB","LC","LI","LK","LR","LS","LT","LU","LV","LY","MA","MC","MD","ME","MF","MG","MH","MK","ML","MM","MN","MO","MP","MQ","MR","MS","MT","MU","MV","MW","MX","MY","MZ","NA","NC","NE","NF","NG","NI","NL","NO","NP","NR","NU","NZ","OM","PA","PE","PF","PG","PH","PK","PL","PM","PN","PR","PS","PT","PW","PY","QA","RE","RO","RS","RU","RW","SA","SB","SC","SD","SE","SG","SH","SI","SJ","SK","SL","SM","SN","SO","SR","SS","ST","SV","SX","SY","SZ","TC","TD","TF","TG","TH","TJ","TK","TL","TM","TN","TO","TR","TT","TV","TW","TZ","UA","UG","UM","US","UY","UZ","VA","VC","VE","VG","VI","VN","VU","WF","WS","XZ","YE","YT","ZA","ZM","ZW"]
+    },
+    "CommunicationChannelCode": {
+      "type": "string",
+      "enum": ["0","1","10","20","30","40","50","60","70","70-10","70-20","70-30","70-40","70-50","70-60","70-70","70-80","70-90","70-100"]
+    },
+    "CommunicationMediumCode": {
+      "type": "string",
+      "enum": ["0","10","10-10","10-20","20","30","30-10","30-20"]
+    },
+    "SexCodeC0": {
+      "type": "string",
+      "enum": ["10","20","30","40"]
+    },
+    "MaritalStatusCodeC0": {
+      "type": "string",
+      "enum": ["10","20","30","40","50","60"]
+    },
+    "PersonName": {
+              "type": "object",
+              "properties": {
+                "Full": {"type": "string", "$comment": "A string of characters providing a name or set of names by which this person is known"},
+                "Given": {"type": "string", "$comment": "Name or names, usually given to a person by his/her parents at birth, also known as forename, first name or Christian name."},
+                "Family": {"type": "string", "$comment": "The name a person shares with members of his/her family, also known as surname."},
+                "FamilyPrefix": {"type": "string", "$comment": "The textual description of any prefix that precedes this person's family name such as van, von etc. (Fred Van Blommestein)."},
+                "Initials": {"type": "string", "$comment": "Generally in the form of a set of the initial letters of the Given and Middle names, optionally space-delimited."},
+                "Title": {"type": "string", "$comment": "The textual description of any title associated with a specific person such as Dr.,  Ir. etc."},
+                "Middle": {"type": "string", "$comment": "Name or names, usually given to a person by his/her parents at birth, other than the first name."}
+              }
+            },
+    "GenderCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","30-10","40","40-10","40-20","50"]
+    },
+    "ReligionCode": {
+      "type": "string",
+      "enum": ["10","20","30","40","50","60","70","99","00"]
+    },
+    "LanguageCode": {
+      "type": "string",
+      "enum": ["ab","aa","af","ak","sq","am","ar","an","hy","as","av","ae","ay","az","bm","ba","eu","be","bn","bh","bi","bs","br","bg","my","ca","ch","ce","ny","zh","cv","kw","co","cr","hr","cs","da","dv","nl","dz","en","eo","et","ee","fo","fj","fi","fr","ff","gl","ka","de","el","gn","gu","ht","ha","he","hz","hi","ho","hu","ia","id","ie","ga","ig","ik","io","is","it","iu","ja","jv","kl","kn","kr","ks","kk","km","ki","rw","ky","kv","kg","ko","ku","kj","la","lb","lg","li","ln","lo","lt","lu","lv","gv","mk","mg","ms","ml","mt","mi","mr","mh","mn","na","nv","nd","ne","ng","nb","nn","no","ii","nr","oc","oj","cu","om","or","os","pa","pi","fa","pl","ps","pt","qu","rm","rn","ro","ru","sa","sc","sd","se","sm","sg","sr","gd","sn","si","sk","sl","so","st","es","su","sw","ss","sv","ta","te","tg","th","ti","bo","tk","tl","tn","to","tr","ts","tt","tw","ty","ug","uk","ur","uz","ve","vi","vo","wa","cy","wo","fy","xh","yi","yo","za","zu"]
+    },
+    "EthnicOriginCode": {
+      "type": "string",
+      "enum": ["10","10-10","10-20","10-30","10-99","20","20-10","20-20","20-30","20-99","30","30-10","30-20","30-30","30-40","30-99","40","40-10","40-20","40-99","50","99","00"]
+    },
+    "MonetaryAmount": {
+                        "type": "object",
+                        "properties": {
+                        }
+                      },
+    "FrequencyCodeC0": {
+      "type": "string",
+      "enum": ["30","40","50","60"]
+    },
+    "UKEntitlementTypeCode": {
+      "type": "string",
+      "enum": ["0","10","20","30","40","50","60","70","80","90","100","110","120","130","140","150","160","170","180","190","200","210","220","230","240","250","260","270","280","290","300","310","320","330","340","350","360","370","380","390","400","410","420","430","440","450","460","470","480","490","500"]
+    },
+    "IncomeOrExpenditureAmountBasisCode": {
+      "type": "string",
+      "enum": ["0","10","20"]
+    },
+    "IncomeOrExpenditureCode": {
+      "type": "string",
+      "enum": ["Expenditure","Income"]
+    },
+    "IncomeOrExpenditureTypeCode": {
+      "type": "string",
+      "enum": ["0","10","10-10","10-20","10-30","10-0","20","20-10","20-20","20-30","20-40","20-50","20-60","20-0"]
+    },
+    "PersonAlertTypeCode": {
+      "type": "string",
+      "enum": ["0","1","10","10-10","20","20-10","20-20","20-30","20-40","20-50","20-60","20-70","30","40","50","60"]
+    }
+  },
+  "CareReferral": {
+    "type": "object",
+    "properties": {
+      "ServiceUser": {
+        "type": "array",
+        "minItems": 1,
+        "items": 
+        {"type": "#/definitions/ServiceUser"}
+      },
+      "AssociatedIndividual": {
+        "type": "array",
+        "minItems": 1,
+        "items": 
+        {"type": "#/definitions/ServiceUser"}
+      },
+      "Reference": {
+        "type": "array",
+        "items": 
+        {"type": "#/definitions/Reference"}
+      },
+      "Date": {"type": "date", "$comment": "The date that the referral was sent from the referrer to the service provider."},
+      "SelfReferred": {"type": "boolean", "$comment": "Indicates whether or not the Service User self-referred, or whether someone else referred them"},
+      "Referrer": {"type": "#/definitions/Party"},
+      "OtherParticipant": {
+        "type": "array",
+        "items": 
+        {"type": "#/definitions/Party"}
+      },
+      "Declaration": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "Statement": {"type": "string", "$comment": "The declaration itself that is being made or not made, for example \"I declare that neither I or my family work for the service provider or any affiliated company\"."},
+            "Reference": {"type": "#/definitions/Reference"},
+            "Declared": {"type": "boolean", "$comment": "Indicates if this declaration was made (true) or declined (false). If this attribute is omitted, it should be understood that the declaration was neither made nor declined."}
+          }
+        }
+      },
+      "Service": {
+        "type": "object",
+        "properties": {
+          "Name": {"type": "string", "$comment": "The name of the service (given by the Service Provider)"},
+          "ActionOrInterventionTypeCode": {
+            "type": "array",
+            "items": {"type": "#/definitions/CareActionTypeCode", "$comment": "Identifies the types of action that are provided by this service."}
+          },
+          "TargetNeedTypeCode": {
+            "type": "array",
+            "items": {"type": "#/definitions/CustomerNeedTypeCode", "$comment": "Identifies the need types that this service is intended to provide care and support for"}
+          },
+          "Reference": {"type": "#/definitions/Reference"}
+        }
+      },
+      "Eligiblity": {
+        "type": "object",
+        "properties": {
+          "ServiceCriteriaReference": {"type": "#/definitions/Reference"},
+          "Criterion": {
+            "type": "array",
+            "items": 
+            {"type": "#/definitions/CareServiceCriterion"}                  {"type": "#/definitions/CareServiceCriterion"}
+                },
+                "AnswerAttachment": {
+                  "type": "array",
+                  "items": 
+                  {"type": "#/definitions/Attachment"}
+                },
+                "AnswerNarrative": {"type": "string", "$comment": "Where the type is Narrative, the narrative answer provided by the referrer (may also be provided in the AnswerAttachment or supported by the AnswerAttachment)."},
+                "AnswerNumeric": {"type": "number", "$comment": "Where the type is Numeric, the single number provided as the answer"},
+                "AnswerYesNo": {"type": "boolean", "$comment": "Where the type is Yes/No, true for yes or false for no."},
+                "AnswerDate": {"type": "date", "$comment": "Where the type is Date, the single date provided as the answer"},
+                "Reference": {"type": "#/definitions/Reference"},
+                "Type": {"type": "#/definitions/QuestionOrCriterionTypeCode", "$comment": "Identifies the type of criterion so that the presentation of the questions, collection of the answer, and assesment of whether or not the answer meets the criterion can be completed."}
+              },
+              "required": ["AnswerDate","Reference"]
+            }
+          }
+        },
+        "required": ["ServiceCriteriaReference"]
+      },
+      "Response": {
+        "type": "object",
+        "properties": {
+        }
+      },
+      "AdditionalQuestionsQuestion": {
+        "type": "array",
+        "items": 
+        {
+          "type": "object",
+          "properties": {
+            "AnswerAttachment": {
+              "type": "array",
+              "items": 
+              {"type": "#/definitions/Attachment"}
+            },
+            "AnswerNarrative": {"type": "string", "$comment": "Where the type is Narrative, the narrative answer provided by the referrer (may also be provided in the AnswerAttachment or supported by the AnswerAttachment)."},
+            "AnswerNumeric": {"type": "number", "$comment": "Where the type is Numeric, the single number provided as the answer"},
+            "AnswerYesNo": {"type": "boolean", "$comment": "Where the type is Yes/No, true for yes or false for no."},
+            "AnswerDate": {"type": "date", "$comment": "Where the type is Date, the single date provided as the answer"},
+            "Reference": {"type": "#/definitions/Reference"},
+            "Type": {"type": "#/definitions/QuestionOrCriterionTypeCode", "$comment": "Identifies the type of criterion so that the presentation of the questions, collection of the answer, and assesment of whether or not the answer meets the criterion can be completed."}
+          },
+          "required": ["AnswerDate","Reference"]
+        }
+      }
+    },
+    "required": ["ServiceUser","AssociatedIndividual","Service"]
+  }
+}
