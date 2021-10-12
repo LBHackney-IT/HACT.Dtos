@@ -14,8 +14,8 @@ namespace HACT.Generator
     {
         static void Main(string[] args)
         {
-            var inputPath = "../../../../HACT.DataStandard";
-            var outputPath = "../../../../HACT.Dtos";
+            var inputPath = args[0]; //path to directory containing HACT Data Standard
+            var outputPath = args[1]; //output path for generated Dtos
 
             var excludedFiles = new List<string>();
             foreach (var inputFile in Directory.EnumerateFiles(inputPath, "*.json")) {
