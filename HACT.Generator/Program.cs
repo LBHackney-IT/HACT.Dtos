@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NJsonSchema;
 using NJsonSchema.CodeGeneration.CSharp;
-using System.IO;
-using System.Threading.Tasks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace HACT.Generator
 {
@@ -18,11 +18,15 @@ namespace HACT.Generator
             var outputPath = args[1]; //output path for generated Dtos
 
             var excludedFiles = new List<string>();
-            foreach (var inputFile in Directory.EnumerateFiles(inputPath, "*.json")) {
+            foreach (var inputFile in Directory.EnumerateFiles(inputPath, "*.json"))
+            {
                 var inputFileName = Path.GetFileNameWithoutExtension(inputFile);
-                try {
+                try
+                {
                     Run(inputFileName, inputPath, outputPath).Wait();
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                     excludedFiles.Add(inputFileName);
                 }
             }
@@ -40,7 +44,7 @@ namespace HACT.Generator
                 .Replace(@"""type"": ""date""", "\"type\": \"string\", \"format\": \"date\"")
                 .Replace(@"""type"": ""date-time""", "\"type\": \"string\", \"format\": \"date-time\"");
 
-            JObject parsedFile = (JObject) JsonConvert.DeserializeObject(replacedJson);
+            JObject parsedFile = (JObject)JsonConvert.DeserializeObject(replacedJson);
 
             var data = parsedFile.Last;
             JObject properties = data.Last as JObject;
@@ -68,7 +72,8 @@ namespace HACT.Generator
 
         private static void DisallowAdditionalProperties(JsonSchema schema, string pref)
         {
-            if (schema is null) return;
+            if (schema is null)
+                return;
 
             schema.AllowAdditionalProperties = false;
 
