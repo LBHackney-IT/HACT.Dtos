@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
+  format:
     name: Test and Format
     runs-on: ubuntu-latest
     steps:
@@ -20,10 +20,8 @@ jobs:
         run: dotnet tool update --global dotnet-format
       - name: Run dotnet format
         run: dotnet format --check --verbosity diagnostic
-      - name: Test
-        run: dotnet test --no-build --verbosity normal
-  build:
-    needs: test
+  build_and_test:
+    needs: format
     runs-on: ubuntu-latest
 
     steps:
@@ -32,9 +30,7 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-    - name: Restore dependencies
-      run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build
     - name: Test
       run: dotnet test --no-build --verbosity normal
