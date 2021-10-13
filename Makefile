@@ -1,6 +1,6 @@
 .PHONY: build
 build:
-	dotnet build HACT.Dtos
+	dotnet build
 
 .PHONY: test
 test:
@@ -11,6 +11,6 @@ lint:
 	-dotnet tool install dotnet-format --tool-path ./local-tools/dotnet-format/
 	./local-tools/dotnet-format/dotnet-format
 
-.PHONY: run
-run:
-	dotnet run --project HousingRepairsOnlineApi
+.PHONY: run-generator
+run-generator:
+	dotnet run --project HACT.Generator HACT.DataStandard HACT.Dtos
