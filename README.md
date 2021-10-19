@@ -27,7 +27,7 @@ Check that you have the following set as one of your registered sources:
 
 If it s not in your list of registered sources, you will need to generate a GitHub api token:
 
-1) Navigate to `https://github.com/settings/apps/new `
+1) Navigate to https://github.com/settings/tokens/new
 2) Fill the note section accordingly
 3) Check the `repo` and `read:packages` checkboxes
 4) Click generate token 
