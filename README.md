@@ -1,6 +1,6 @@
 # HACT.Dtos
 Housing Association Charitable Trust (HACT) have published a 
-data standard for housing data interactions. This repo publishes a 
+[data standard](https://www.hact.org.uk/DataStandard) for housing data interactions. This repo publishes a 
 nuget which includes a C# implementation of the standard, allowing 
 .NET applications to adhere to the HACT standard.
 
@@ -45,4 +45,25 @@ To add the package, replace PROJECT with the path to the project the nuget will 
 
 ```
 dotnet add PROJECT package HACT.Dtos
+```
+
+## Discrepencies between use case definitions and data model 
+The use case JSON definitions consumed by the HACT.Generator project do not provide complete definition of the HACT entities. The full data model can be viewed [here](https://www.oscre.org/idm).
+Due to the incompleteness of entity definitions within the use cases, if a need arises to make a generated DTO more (not necessarily completely) reflective of the full definition, then follow these steps:
+- Create a partial class definition with the same name as the entity.
+The HACT.Generator produces partial classes, which this new class would be combined with. 
+- Ensure the namespace of the new partial class is `HACT.Dtos`, which is the default namespace of all classes the HACT.Generator produces.
+- Add required additions within this class definition.
+
+An example of this is `PropertyAddress`, where the use case JSON does not define an Reference property that is defined in the [data model](https://www.oscre.org/idm?version=idm-main-3_3&content=entity/PropertyAddress&product=HACT).
+
+The following is the partial class needed to add the Reference property to `PropertyAddress`:  
+```
+namespace HACT.Dtos
+{
+    public partial class PropertyAddress
+    {
+        public Reference Reference { get; set; }
+    }
+}
 ```
