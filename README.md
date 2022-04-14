@@ -12,7 +12,7 @@ calls. For more information, see [Data Transfer Object](https://martinfowler.com
 The nuget is being hosted by [github packages](https://docs.github.com/en/packages/learn-github-packages/introduction-to-github-packages).
 
 To consume the package in your project, first check if you have
-City of Lincoln GitHub set up as a nuget source. To do this run 
+London Borough of Hackney GitHub set up as a nuget source. To do this run 
 the following on you're terminal:
 
 ```
@@ -22,7 +22,7 @@ Check that you have the following set as one of your registered sources:
 
 ```
  1. github [Enabled]
- https://nuget.pkg.github.com/City-of-Lincoln-Council/index.json
+ https://nuget.pkg.github.com/LBHackney-IT/index.json
 ```
 
 If it s not in your list of registered sources, you will need to generate a GitHub api token:
@@ -37,7 +37,7 @@ Replace `USERNAME` with your GitHub username and `PASSWORD`
 with the token on your clipboard and run the following in the terminal:
 
 ```
-dotnet nuget add source --username USERNAME --password PASSWORD --store-password-in-clear-text --name github "https://nuget.pkg.github.com/City-of-Lincoln-Council/index.json"
+dotnet nuget add source --username USERNAME --password PASSWORD --store-password-in-clear-text --name github "https://nuget.pkg.github.com/LBHackney-IT/index.json"
 ```
 Check that you have now added GitHub as a nuget source (see beginning of guide).
 
