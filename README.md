@@ -44,7 +44,7 @@ Check that you have now added GitHub as a nuget source (see beginning of guide).
 To add the package, replace PROJECT with the path to the project the nuget will be installed to and run:
 
 ```
-dotnet add PROJECT package HACT.Dtos
+dotnet add PROJECT package HACT.Dtos --version 1.0.0-Hackney
 ```
 
 ## Discrepencies between use case definitions and data model 
