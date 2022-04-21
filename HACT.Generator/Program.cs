@@ -61,7 +61,7 @@ namespace HACT.Generator
             {
                 DateTimeType = "System.DateTime",
                 DateType = "System.DateTime",
-                Namespace = "HACT.Dtos.Hackney.Hackney",
+                Namespace = "HACT.Dtos",
                 GenerateDefaultValues = false,
                 GenerateOptionalPropertiesAsNullable = true
             });
