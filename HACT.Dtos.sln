@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HACT.Dtos", "HACT.Dtos\HACT.Dtos.csproj", "{BA564717-F42C-497C-8347-CBE69A7A6A7F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HACT.Dtos.Hackney", "HACT.Dtos.Hackney\HACT.Dtos.Hackney.csproj", "{BA564717-F42C-497C-8347-CBE69A7A6A7F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HACT.Dtos.Tests", "HACT.Dtos.Tests\HACT.Dtos.Tests.csproj", "{D9153C49-85E3-4ABB-97F8-DDA4E7ADAAB4}"
 EndProject
