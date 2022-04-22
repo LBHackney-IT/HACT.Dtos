@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <PackageId>HACT.Dtos</PackageId>
+    <PackageId>Hackney.HACT.Dtos</PackageId>
     <Authors>London Borough of Hackney Council</Authors>
     <Company>London Borough of Hackney Council</Company>
     <RepositoryUrl>https://github.com/LBHackney-IT/HACT.Dtos</RepositoryUrl>
@@ -11,5 +11,5 @@
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
-  
+
 </Project>
