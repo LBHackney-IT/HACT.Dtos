@@ -1,4 +1,4 @@
-name: HACT.Dtos
+name: Publish
 
 on:
   release:
