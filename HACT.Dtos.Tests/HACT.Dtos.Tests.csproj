@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HACT.Dtos.Hackney\HACT.Dtos.Hackney.csproj" />
+    <ProjectReference Include="..\HACT.Dtos\HACT.Dtos.csproj" />
   </ItemGroup>
 
 </Project>
